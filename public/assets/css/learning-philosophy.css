@@ -1,0 +1,360 @@
+/* ================= LEARNING PHILOSOPHY =================
+   Uses the existing :root variables, .sec, .eyebrow, .sec-title, .sec-text,
+   .sec-head-center, .chips, .btn-row, button classes and .c-* colour
+   helpers from style.css. Self-contained: does not need the other page CSS. */
+
+/* ---- Intro + index ---- */
+.lp-intro {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 2.25rem;
+    align-items: center;
+}
+
+@media (min-width: 992px) {
+    .lp-intro {
+        grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+        gap: 4rem;
+    }
+}
+
+.lp-lead {
+    font-family: var(--font-head);
+    font-weight: 700;
+    font-size: clamp(1.1rem, 1rem + 0.6vw, 1.35rem);
+    line-height: 1.45;
+    color: var(--accent-text);
+    margin: 1.2rem 0 1rem;
+    padding-left: 1rem;
+    border-left: 3px solid var(--accent);
+}
+
+.lp-index {
+    background: var(--bg-alt);
+    border-radius: 1rem;
+    padding: clamp(1.25rem, 3vw, 1.75rem);
+}
+
+.lp-index-title {
+    font-family: var(--font-head);
+    font-weight: 700;
+    font-size: 0.8rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 0.9rem;
+}
+
+.lp-index ol {
+    display: grid;
+    gap: 0.5rem;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+@media (min-width: 576px) and (max-width: 991.98px) {
+    .lp-index ol {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+.lp-index a {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 0.8rem;
+    padding: 0.7rem 0.95rem 0.7rem 0.75rem;
+    font-weight: 700;
+    font-size: 0.97rem;
+    line-height: 1.3;
+    color: var(--navy);
+    text-decoration: none;
+    transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.lp-index-num {
+    width: 2.3rem;
+    height: 2.3rem;
+    display: grid;
+    place-items: center;
+    border-radius: 0.6rem;
+    background: var(--t);
+    color: var(--c);
+    font-family: var(--font-head);
+    font-weight: 800;
+    font-size: 0.9rem;
+    flex-shrink: 0;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.lp-index a i {
+    margin-left: auto;
+    color: var(--c);
+    transition: transform 0.2s ease;
+}
+
+.lp-index a:focus-visible {
+    border-color: var(--c);
+}
+
+/* ---- Six principles ---- */
+.lp-list {
+    display: grid;
+    gap: clamp(1rem, 3vw, 1.75rem);
+}
+
+.lp-item {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 1rem;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Desktop: visual panel on one side, text on the other, alternating */
+@media (min-width: 768px) {
+    .lp-item {
+        grid-template-columns: minmax(0, 0.34fr) minmax(0, 1fr);
+    }
+
+    .lp-item:nth-child(even) {
+        grid-template-columns: minmax(0, 1fr) minmax(0, 0.34fr);
+    }
+
+    .lp-item:nth-child(even) .lp-visual {
+        order: 2;
+    }
+}
+
+/* Tinted panel with the number and a large icon */
+.lp-visual {
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    background: var(--t);
+    color: var(--c);
+    padding: 1.1rem 1.4rem;
+}
+
+.lp-num {
+    font-family: var(--font-head);
+    font-weight: 800;
+    font-size: clamp(2.2rem, 1.6rem + 2.5vw, 4rem);
+    line-height: 1;
+    letter-spacing: -0.02em;
+}
+
+.lp-visual i {
+    font-size: clamp(2rem, 1.5rem + 2vw, 3.2rem);
+    line-height: 1;
+    opacity: 0.85;
+}
+
+@media (min-width: 768px) {
+    .lp-visual {
+        flex-direction: column;
+        justify-content: center;
+        gap: 1.25rem;
+        padding: 2rem 1rem;
+        min-height: 15rem;
+    }
+
+    /* big soft circle behind the number */
+    .lp-visual::before {
+        content: "";
+        position: absolute;
+        width: 15rem;
+        height: 15rem;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.55);
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    .lp-visual>* {
+        position: relative;
+    }
+}
+
+.lp-body {
+    padding: clamp(1.4rem, 4vw, 2.5rem);
+    min-width: 0;
+}
+
+.lp-name {
+    display: inline-block;
+    font-family: var(--font-head);
+    font-weight: 700;
+    font-size: 0.78rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--c);
+    background: var(--t);
+    border-radius: 999px;
+    padding: 0.35rem 0.85rem;
+    margin-bottom: 0.9rem;
+}
+
+.lp-item h3 {
+    font-family: var(--font-head);
+    font-weight: 700;
+    font-size: clamp(1.2rem, 1rem + 1vw, 1.65rem);
+    line-height: 1.25;
+    color: var(--navy);
+    margin: 0 0 0.9rem;
+}
+
+.lp-body p {
+    font-size: 1rem;
+    line-height: 1.75;
+    color: var(--text);
+    max-width: 62ch;
+    margin: 0 0 0.75rem;
+}
+
+.lp-body p:last-child {
+    margin-bottom: 0;
+}
+
+.lp-body p.lp-strong {
+    font-weight: 700;
+    color: var(--ink);
+}
+
+.lp-chips {
+    margin: 0.2rem 0 1rem;
+}
+
+/* Opened from the header menu (about.html#scientific etc.): mark the one that was jumped to */
+.lp-item:target {
+    border-color: var(--c);
+    box-shadow: 0 0 0 3px var(--t), var(--shadow);
+}
+
+/* ---- Summary ---- */
+.lp-sum-head {
+    margin-bottom: 0;
+}
+
+.lp-flow {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.2rem 1.1rem;
+    list-style: none;
+    padding: 0;
+    margin: 0 0 1.2rem;
+    font-family: var(--font-head);
+    font-weight: 800;
+    font-size: clamp(1.3rem, 1rem + 1.8vw, 2.2rem);
+    line-height: 1.25;
+}
+
+.lp-flow li:nth-child(odd) {
+    color: var(--navy);
+}
+
+.lp-flow li:nth-child(even) {
+    color: var(--primary);
+}
+
+/* ---- Closing band ---- */
+.lp-band {
+    background: var(--grad);
+    color: #dbe7f5;
+    text-align: center;
+    padding: clamp(3rem, 7vw, 5rem) 0;
+}
+
+.lp-motto {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0.75rem;
+    list-style: none;
+    padding: 0;
+    margin: 0 0 clamp(2rem, 5vw, 3rem);
+}
+
+@media (min-width: 576px) {
+    .lp-motto {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (min-width: 992px) {
+    .lp-motto {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 1rem;
+    }
+}
+
+.lp-motto li {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.7rem;
+    font-family: var(--font-head);
+    font-weight: 700;
+    font-size: clamp(1rem, 0.92rem + 0.4vw, 1.12rem);
+    line-height: 1.3;
+    color: #fff;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.22);
+    border-radius: 0.9rem;
+    padding: 1.4rem 0.9rem;
+}
+
+.lp-motto i {
+    font-size: 1.6rem;
+    color: var(--accent-light);
+}
+
+.lp-brand {
+    font-family: var(--font-head);
+    font-weight: 800;
+    font-size: clamp(1.4rem, 1.1rem + 1.2vw, 1.9rem);
+    line-height: 1.1;
+    color: #fff;
+    margin-bottom: 0.3rem;
+}
+
+.lp-brand-tag {
+    font-weight: 600;
+    color: var(--accent-light);
+    margin-bottom: 1.5rem;
+}
+
+.lp-band .btn-row {
+    justify-content: center;
+}
+
+/* ---- Hover (mouse devices only) ---- */
+@media (hover: hover) {
+    .lp-index a:hover {
+        border-color: var(--c);
+        background: var(--t);
+    }
+
+    .lp-index a:hover .lp-index-num {
+        background: var(--c);
+        color: #fff;
+    }
+
+    .lp-index a:hover i {
+        transform: translateY(3px);
+    }
+
+    .lp-item:hover {
+        border-color: var(--c);
+    }
+}

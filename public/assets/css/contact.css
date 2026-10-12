@@ -1,0 +1,385 @@
+/* ================= CONTACT PAGE =================
+   Paste AFTER the existing style.css. Uses existing :root variables, .sec, .eyebrow,
+   .sec-title, .sec-text, .sub-title, .chips, .wt-ico, .gl-panel, .cta-row, .btn-* and .c-* helpers. */
+
+/* ---- Hero ---- */
+.ct-hero {
+    background: var(--grad);
+    color: #dbe7f5;
+    padding: clamp(2.75rem, 7vw, 4.75rem) 0;
+}
+
+.ct-crumb {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    list-style: none;
+    padding: 0;
+    margin: 0 0 1.1rem;
+    font-size: 0.88rem;
+}
+
+.ct-crumb li+li::before {
+    content: "/";
+    margin-right: 0.4rem;
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.ct-crumb a {
+    color: var(--accent-light);
+    text-decoration: none;
+}
+
+.ct-crumb a:hover,
+.ct-crumb a:focus-visible {
+    text-decoration: underline;
+    text-underline-offset: 0.25em;
+}
+
+.ct-crumb li[aria-current] {
+    color: #fff;
+}
+
+.ct-hero-title {
+    font-family: var(--font-head);
+    font-weight: 700;
+    color: #fff;
+    font-size: clamp(1.8rem, 1.2rem + 3vw, 3.1rem);
+    line-height: 1.12;
+    margin-bottom: 0.9rem;
+}
+
+.ct-hero-sub {
+    max-width: 38rem;
+    font-size: 1.05rem;
+    line-height: 1.7;
+    margin-bottom: 1.6rem;
+}
+
+/* ---- Details + form layout ---- */
+.ct-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 2.5rem;
+}
+
+@media (min-width: 992px) {
+    .ct-grid {
+        grid-template-columns: minmax(0, 0.82fr) minmax(0, 1.18fr);
+        gap: 3.5rem;
+        align-items: start;
+    }
+
+    .ct-side {
+        position: sticky;
+        top: calc(var(--nav-h) + 1.5rem);
+    }
+}
+
+.ct-tiles {
+    display: grid;
+    gap: 0.75rem;
+    margin-top: 1.75rem;
+}
+
+.ct-tile {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.9rem 1rem;
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 0.85rem;
+    box-shadow: var(--shadow);
+    text-decoration: none;
+    color: inherit;
+    min-width: 0;
+    transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+
+a.ct-tile:hover,
+a.ct-tile:focus-visible {
+    border-color: var(--c);
+    background: var(--t);
+}
+
+.ct-tile-txt {
+    min-width: 0;
+}
+
+.ct-tile small {
+    display: block;
+    font-size: 0.78rem;
+    color: var(--muted);
+}
+
+.ct-tile strong {
+    display: block;
+    font-weight: 700;
+    font-size: 0.98rem;
+    color: var(--ink);
+    overflow-wrap: anywhere;
+}
+
+.ct-hours {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.8rem;
+    margin-top: 1.1rem;
+    padding: 1rem 1.1rem;
+    background: var(--t-blue);
+    border-radius: 0.85rem;
+    color: var(--text);
+}
+
+.ct-hours i {
+    font-size: 1.25rem;
+    color: var(--primary);
+    margin-top: 0.1rem;
+}
+
+.ct-hours p {
+    margin: 0;
+    font-size: 0.93rem;
+    line-height: 1.6;
+}
+
+/* ---- Form ---- */
+.ct-form-card {
+    background: #fff;
+    border: 1px solid var(--line);
+    border-top: 3px solid var(--primary);
+    border-radius: 1rem;
+    box-shadow: var(--shadow);
+    padding: clamp(1.4rem, 4vw, 2.4rem);
+}
+
+.ct-form-title {
+    font-family: var(--font-head);
+    font-weight: 700;
+    color: var(--navy);
+    font-size: clamp(1.2rem, 1rem + 1vw, 1.6rem);
+    margin: 0 0 0.3rem;
+}
+
+.ct-form-sub {
+    color: var(--muted);
+    font-size: 0.9rem;
+    margin-bottom: 1.4rem;
+}
+
+.ct-req {
+    color: var(--red);
+    font-weight: 700;
+}
+
+.ct-form .form-label {
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: var(--ink);
+    margin-bottom: 0.35rem;
+}
+
+.ct-form .form-control,
+.ct-form .form-select {
+    border: 1.5px solid var(--line-dark);
+    border-radius: 0.6rem;
+    padding: 0.7rem 0.9rem;
+    font-size: 0.97rem;
+    color: var(--ink);
+    background-color: #fff;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.ct-form textarea.form-control {
+    resize: vertical;
+    min-height: 7.5rem;
+}
+
+.ct-form .form-control:focus,
+.ct-form .form-select:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(11, 111, 194, 0.18);
+    outline: none;
+}
+
+.ct-form .form-control::placeholder {
+    color: #8593a4;
+}
+
+.ct-form .form-check-input {
+    width: 1.15rem;
+    height: 1.15rem;
+    margin-top: 0.2rem;
+    border: 1.5px solid var(--line-dark);
+}
+
+.ct-form .form-check-input:checked {
+    background-color: var(--primary);
+    border-color: var(--primary);
+}
+
+.ct-form .form-check-input:focus {
+    box-shadow: 0 0 0 3px rgba(11, 111, 194, 0.18);
+    border-color: var(--primary);
+}
+
+.ct-form .form-check-label {
+    font-size: 0.9rem;
+    line-height: 1.5;
+    color: var(--text);
+}
+
+/* Show validation only after the user tries to submit (class added by JS) */
+.ct-form.was-validated .form-control:invalid,
+.ct-form.was-validated .form-select:invalid {
+    border-color: var(--red);
+}
+
+.ct-form.was-validated .form-check-input:invalid {
+    border-color: var(--red);
+}
+
+/* Spam trap, hidden from people and screen readers */
+.ct-hp {
+    position: absolute;
+    left: -9999px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+}
+
+@media (max-width: 575.98px) {
+    .ct-form .btn {
+        width: 100%;
+    }
+}
+
+/* ---- International enquiry ---- */
+.ct-intl {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 1.25rem;
+}
+
+@media (min-width: 992px) {
+    .ct-intl {
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+        gap: 1.5rem;
+    }
+}
+
+.ct-intl-body {
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 1rem;
+    padding: clamp(1.5rem, 4vw, 2.4rem);
+    box-shadow: var(--shadow);
+}
+
+.ct-intl-body .sub-title {
+    text-align: left;
+    margin-bottom: 1.1rem;
+}
+
+.ct-intl-body .chips {
+    margin-bottom: 1.5rem;
+}
+
+/* ---- FAQ ---- */
+.ct-faq {
+    max-width: 50rem;
+    margin: 0 auto;
+    --bs-accordion-border-color: var(--line);
+    --bs-accordion-active-bg: var(--t-blue);
+    --bs-accordion-active-color: var(--navy);
+    --bs-accordion-btn-focus-box-shadow: 0 0 0 3px rgba(11, 111, 194, 0.2);
+}
+
+.ct-faq .accordion-item {
+    border: 1px solid var(--line);
+    border-radius: 0.85rem;
+    overflow: hidden;
+    margin-bottom: 0.75rem;
+    box-shadow: var(--shadow);
+}
+
+.ct-faq .accordion-item:last-child {
+    margin-bottom: 0;
+}
+
+.ct-faq .accordion-button {
+    font-family: var(--font-head);
+    font-weight: 700;
+    font-size: 1.02rem;
+    line-height: 1.35;
+    color: var(--navy);
+    padding: 1.05rem 1.25rem;
+}
+
+.ct-faq .accordion-button:not(.collapsed) {
+    box-shadow: none;
+}
+
+.ct-faq .accordion-body {
+    color: var(--text);
+    line-height: 1.7;
+    padding: 0.25rem 1.25rem 1.25rem;
+    background: var(--t-blue);
+}
+
+/* ---- Map ---- */
+.ct-visit-sec {
+    padding-bottom: calc(var(--sec) * 0.9);
+}
+
+.ct-map {
+    position: relative;
+    aspect-ratio: 16 / 9;
+    border-radius: 1rem;
+    overflow: hidden;
+    background: var(--grad);
+    box-shadow: var(--shadow);
+}
+
+@media (min-width: 768px) {
+    .ct-map {
+        aspect-ratio: 21 / 8;
+    }
+}
+
+.ct-map iframe {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+    z-index: 1;
+}
+
+/* Fallback shows only while the iframe has no src */
+.ct-map iframe[src=""],
+.ct-map iframe:not([src]) {
+    display: none;
+}
+
+.ct-map-fb {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    color: #fff;
+    font-weight: 600;
+}
+
+.ct-map-fb i {
+    font-size: clamp(2.5rem, 7vw, 4rem);
+    color: var(--accent-light);
+}
+
+.ct-map iframe[src]:not([src=""])~.ct-map-fb {
+    display: none;
+}

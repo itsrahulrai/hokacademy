@@ -1,0 +1,543 @@
+/* ================= VISION / MISSION / COMMITMENT =================
+   Uses the existing :root variables, .sec, .eyebrow, .sec-title, .sec-text,
+   .sub-title, .wt-ico, .btn-row, button classes and .c-* colour helpers
+   from style.css. Self-contained: does not need the other page CSS. */
+
+/* ---- In-page nav ---- */
+.vm-nav {
+    background: #fff;
+    border-bottom: 1px solid var(--line);
+    padding: 0.75rem 0;
+}
+
+.vm-nav ul {
+    display: flex;
+    gap: 0.5rem;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    overflow-x: auto;
+    scrollbar-width: none;
+}
+
+.vm-nav ul::-webkit-scrollbar {
+    display: none;
+}
+
+@media (min-width: 768px) {
+    .vm-nav ul {
+        justify-content: center;
+    }
+}
+
+.vm-nav a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    white-space: nowrap;
+    font-weight: 700;
+    font-size: 0.9rem;
+    color: var(--navy);
+    background: var(--bg-alt);
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 0.55rem 1.1rem;
+    text-decoration: none;
+    transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.vm-nav a i {
+    color: var(--primary);
+    font-size: 1.05rem;
+    transition: color 0.2s ease;
+}
+
+.vm-nav a:hover,
+.vm-nav a:focus-visible {
+    background: var(--primary);
+    border-color: var(--primary);
+    color: #fff;
+}
+
+.vm-nav a:hover i,
+.vm-nav a:focus-visible i {
+    color: #fff;
+}
+
+/* ---- Vision: intro ---- */
+.vm-intro {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 2.25rem;
+    align-items: center;
+}
+
+@media (min-width: 992px) {
+    .vm-intro {
+        grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+        gap: 4rem;
+    }
+}
+
+.vm-lead {
+    font-family: var(--font-head);
+    font-weight: 700;
+    font-size: clamp(1.1rem, 1rem + 0.6vw, 1.35rem);
+    line-height: 1.45;
+    color: var(--accent-text);
+    margin: 1.2rem 0 1rem;
+    padding-left: 1rem;
+    border-left: 3px solid var(--accent);
+}
+
+/* Photo with a soft offset block behind it and a floating badge */
+.vm-visual {
+    position: relative;
+    padding: 0 0 1.75rem 1.25rem;
+}
+
+.vm-visual::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 2.5rem;
+    top: 2.5rem;
+    bottom: 0;
+    border-radius: 1rem;
+    background: var(--t-teal);
+}
+
+.vm-photo {
+    position: relative;
+    margin: 0;
+    aspect-ratio: 5 / 4;
+    border-radius: 1rem;
+    border-top-right-radius: clamp(3rem, 8vw, 6rem);
+    overflow: hidden;
+    background: linear-gradient(135deg, var(--primary), var(--teal));
+    display: grid;
+    place-items: center;
+    box-shadow: var(--shadow);
+}
+
+.vm-photo img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 1;
+}
+
+.vm-photo-fb {
+    font-size: clamp(4rem, 12vw, 7rem);
+    color: rgba(255, 255, 255, 0.85);
+}
+
+.vm-photo img~.vm-photo-fb {
+    display: none;
+}
+
+.vm-badge {
+    position: absolute;
+    z-index: 2;
+    left: 0;
+    bottom: 0;
+    max-width: min(19rem, 86%);
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 0.9rem;
+    padding: 0.85rem 1rem;
+    box-shadow: 0 18px 34px -20px rgba(12, 45, 87, 0.45);
+    font-size: 0.85rem;
+    line-height: 1.45;
+    color: var(--muted);
+}
+
+.vm-badge strong {
+    display: block;
+    font-family: var(--font-head);
+    font-size: 0.98rem;
+    color: var(--navy);
+}
+
+.vm-badge-ico {
+    width: 2.6rem;
+    height: 2.6rem;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    background: var(--primary);
+    color: #fff;
+    font-size: 1.2rem;
+    flex-shrink: 0;
+}
+
+/* ---- Vision: goals ---- */
+.vm-sub {
+    margin: clamp(2.5rem, 6vw, 4rem) 0 1.2rem;
+}
+
+.vm-goals {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0.9rem;
+}
+
+@media (min-width: 576px) {
+    .vm-goals {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (min-width: 992px) {
+    .vm-goals {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 1.25rem;
+    }
+}
+
+.vm-goal {
+    position: relative;
+    overflow: hidden;
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 1rem;
+    padding: 1.5rem 1.4rem 1.6rem;
+    box-shadow: var(--shadow);
+    transition: transform 0.25s ease, border-color 0.25s ease, background-color 0.25s ease;
+}
+
+/* thin colour bar that grows on hover */
+.vm-goal::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 3px;
+    background: var(--c);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.35s var(--ease);
+}
+
+.vm-goal .wt-ico {
+    transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+.vm-goal p {
+    font-family: var(--font-head);
+    font-weight: 600;
+    font-size: 1.02rem;
+    line-height: 1.45;
+    color: var(--navy);
+    margin: 1.1rem 0 0;
+}
+
+/* ---- Vision: statement ---- */
+.vm-statement {
+    margin-top: clamp(2.5rem, 6vw, 4rem);
+    background:
+        linear-gradient(rgba(7, 27, 51, 0.88), rgba(7, 27, 51, 0.88)),
+        url('../img/bg-3.jpg') center center / cover no-repeat;
+    color: #dbe7f5;
+    border-radius: 1rem;
+    padding: clamp(1.75rem, 5vw, 3.25rem);
+    text-align: center;
+}
+
+.vm-words {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.75rem;
+    list-style: none;
+    padding: 0;
+    margin: 0 0 clamp(1.25rem, 3vw, 1.75rem);
+}
+
+@media (min-width: 768px) {
+    .vm-words {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 1rem;
+    }
+}
+
+.vm-words li {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.6rem;
+    font-family: var(--font-head);
+    font-weight: 800;
+    font-size: clamp(1.15rem, 0.95rem + 1.2vw, 1.75rem);
+    line-height: 1.2;
+    color: #fff;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.22);
+    border-radius: 0.9rem;
+    padding: 1.25rem 0.75rem;
+}
+
+.vm-words i {
+    font-size: 1.5rem;
+    color: var(--accent-light);
+}
+
+.vm-statement-text {
+    max-width: 44rem;
+    margin: 0 auto;
+    font-size: 1.04rem;
+    line-height: 1.75;
+}
+
+/* ---- Mission ---- */
+.vm-mission {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 2rem;
+    align-items: start;
+}
+
+@media (min-width: 992px) {
+    .vm-mission {
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+        gap: 4rem;
+    }
+
+    .vm-mission-intro {
+        position: sticky;
+        top: calc(var(--nav-h) + 24px);
+    }
+}
+
+/* Three-line title: last line in the brand blue */
+.vm-mission-title {
+    font-family: var(--font-head);
+    font-weight: 800;
+    color: var(--navy);
+    font-size: clamp(1.5rem, 1rem + 2.2vw, 2.5rem);
+    line-height: 1.16;
+    margin-bottom: 1.3rem;
+}
+
+.vm-mission-title span {
+    display: block;
+}
+
+.vm-mission-title span:last-child {
+    color: var(--primary);
+}
+
+.vm-mission-btns {
+    margin-top: 1.5rem;
+}
+
+.vm-points-title {
+    margin-bottom: 1rem;
+}
+
+.vm-points {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0.65rem;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+/* tablets: two columns (desktop goes back to one, beside the sticky intro) */
+@media (min-width: 576px) and (max-width: 991.98px) {
+    .vm-points {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+.vm-points li {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 0.9rem;
+    padding: 0.9rem 1.1rem 0.9rem 0.9rem;
+    font-weight: 600;
+    font-size: 0.98rem;
+    line-height: 1.45;
+    color: var(--ink);
+    box-shadow: var(--shadow);
+    transition: border-color 0.25s ease, background-color 0.25s ease, transform 0.25s ease;
+}
+
+.vm-points .wt-ico {
+    width: 2.75rem;
+    height: 2.75rem;
+    font-size: 1.25rem;
+    transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+/* ---- Commitment: full-width band (optional photo behind) ---- */
+.vm-band {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    background: linear-gradient(rgba(7, 27, 51, 0.88), rgb(11 111 194 / 63%)), url(../img/bg-3.jpg) center center / cover no-repeat;
+    color: #dbe7f5;
+    color: #dbe7f5;
+    text-align: center;
+    padding: clamp(3rem, 7vw, 5.5rem) 0;
+}
+
+.vm-band-img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -2;
+}
+
+/* colour wash only matters when a photo is present */
+.vm-band-img+.container::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: linear-gradient(120deg, rgba(11, 95, 174, 0.92), rgba(10, 143, 156, 0.88));
+}
+
+.vm-band .container {
+    position: static;
+}
+
+.vm-band .container>* {
+    position: relative;
+    z-index: 1;
+}
+
+.vm-band-label {
+    font-family: var(--font-head);
+    font-weight: 700;
+    font-size: 0.8rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent-light);
+    margin-bottom: 0.9rem;
+}
+
+.vm-band h2 {
+    font-family: var(--font-head);
+    font-weight: 700;
+    color: #fff;
+    font-size: clamp(1.4rem, 1rem + 2vw, 2.3rem);
+    line-height: 1.2;
+    max-width: 44rem;
+    margin: 0 auto 1rem;
+}
+
+.vm-band-text {
+    max-width: 44rem;
+    margin: 0 auto;
+    font-size: 1.02rem;
+    line-height: 1.75;
+}
+
+.vm-pillars {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0.75rem;
+    list-style: none;
+    padding: 0;
+    margin: clamp(2rem, 5vw, 3rem) auto;
+    max-width: 56rem;
+}
+
+@media (min-width: 768px) {
+    .vm-pillars {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 1rem;
+    }
+}
+
+.vm-pillars li {
+    display: flex;
+    align-items: center;
+    gap: 0.9rem;
+    text-align: left;
+    font-family: var(--font-head);
+    font-weight: 700;
+    font-size: clamp(1rem, 0.92rem + 0.4vw, 1.12rem);
+    line-height: 1.3;
+    color: #fff;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.22);
+    border-radius: 0.9rem;
+    padding: 1rem 1.1rem;
+}
+
+@media (min-width: 768px) {
+    .vm-pillars li {
+        flex-direction: column;
+        text-align: center;
+        padding: 1.5rem 1rem;
+    }
+}
+
+.vm-pillar-ico {
+    width: 3rem;
+    height: 3rem;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    background: #fff;
+    color: var(--primary);
+    font-size: 1.35rem;
+    flex-shrink: 0;
+}
+
+.vm-brand {
+    font-family: var(--font-head);
+    font-weight: 800;
+    font-size: clamp(1.4rem, 1.1rem + 1.2vw, 1.9rem);
+    line-height: 1.1;
+    color: #fff;
+    margin-bottom: 0.3rem;
+}
+
+.vm-brand-tag {
+    font-weight: 600;
+    color: var(--accent-light);
+    margin-bottom: 1.5rem;
+}
+
+.vm-band .btn-row {
+    justify-content: center;
+}
+
+/* ---- Hover (mouse devices only) ---- */
+@media (hover: hover) {
+    .vm-goal:hover {
+        transform: translateY(-4px);
+        border-color: var(--c);
+        background: var(--t);
+    }
+
+    .vm-goal:hover::after {
+        transform: scaleX(1);
+    }
+
+    .vm-goal:hover .wt-ico,
+    .vm-points li:hover .wt-ico {
+        background: var(--c);
+        color: #fff;
+    }
+
+    .vm-points li:hover {
+        transform: translateX(4px);
+        border-color: var(--c);
+        background: var(--t);
+    }
+}

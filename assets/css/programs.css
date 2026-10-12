@@ -1,0 +1,323 @@
+/* ================= SERVICE CARDS v2 (sv-) =================
+   Existing variables, .sec, .eyebrow, .sec-title, .c-* helpers, hokRise keyframe use hote hain. */
+
+/* ---- Filter pills ---- */
+.sv-filter {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.6rem;
+    margin-bottom: 1rem;
+}
+
+.sv-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: "Figtree", sans-serif;
+    font-weight: 700;
+    font-size: 0.88rem;
+    color: var(--c);
+    background: #fff;
+    border: 2px solid var(--line);
+    border-radius: 999px;
+    padding: 0.55rem 1rem;
+    transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.sv-pill span {
+    font-size: 0.74rem;
+    min-width: 1.5rem;
+    text-align: center;
+    padding: 0.1rem 0.45rem;
+    border-radius: 999px;
+    background: var(--t);
+    color: var(--c);
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.sv-pill:hover {
+    border-color: var(--c);
+}
+
+.sv-pill.active {
+    background: var(--c);
+    border-color: var(--c);
+    color: #fff;
+}
+
+.sv-pill.active span {
+    background: rgba(255, 255, 255, 0.2);
+    color: #fff;
+}
+
+.sv-pill.c-teal {
+    --c: var(--accent-text);
+}
+
+/* Phones: swipeable single row */
+@media (max-width: 767.98px) {
+    .sv-filter {
+        flex-wrap: nowrap;
+        justify-content: flex-start;
+        overflow-x: auto;
+        scrollbar-width: none;
+        margin-inline: calc(var(--bs-gutter-x, 1.5rem) * -0.5);
+        padding: 0.25rem calc(var(--bs-gutter-x, 1.5rem) * 0.5) 0.5rem;
+    }
+
+    .sv-filter::-webkit-scrollbar {
+        display: none;
+    }
+
+    .sv-pill {
+        white-space: nowrap;
+        flex: 0 0 auto;
+    }
+}
+
+.sv-status {
+    text-align: center;
+    font-size: 0.85rem;
+    color: var(--muted);
+    margin: 0 0 1.5rem;
+}
+
+/* ---- Grid ---- */
+.sv-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 1.25rem;
+}
+
+@media (min-width: 576px) {
+    .sv-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (min-width: 992px) {
+    .sv-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 1.6rem;
+    }
+}
+
+/* ---- Card ---- */
+.sv-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 1rem;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    transition: transform 0.3s var(--ease), box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.sv-card[hidden] {
+    display: none;
+}
+
+.sv-card.is-in {
+    animation: hokRise 0.5s var(--ease) both;
+    animation-delay: calc(var(--i, 0) * 0.05s);
+}
+
+/* coloured line grows in at the bottom on hover */
+.sv-card::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 3px;
+    background: var(--c);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s var(--ease);
+}
+
+/* Image */
+.sv-img {
+    position: relative;
+    aspect-ratio: 16 / 10;
+    overflow: hidden;
+    display: grid;
+    place-items: center;
+    background: linear-gradient(135deg, var(--c), var(--navy-deep));
+}
+
+.sv-img img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 1;
+    transition: transform 0.7s var(--ease);
+}
+
+/* soft dark fade at the bottom of the photo */
+.sv-img::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    background: linear-gradient(180deg, rgba(7, 29, 58, 0) 55%, rgba(7, 29, 58, 0.45) 100%);
+    pointer-events: none;
+}
+
+.sv-fallback {
+    font-size: 3rem;
+    color: var(--accent-light);
+}
+
+.sv-img img~.sv-fallback {
+    display: none;
+}
+
+.sv-tag {
+    position: absolute;
+    z-index: 3;
+    top: 0.8rem;
+    left: 0.8rem;
+    font-family: var(--font-head);
+    font-weight: 700;
+    font-size: 0.72rem;
+    letter-spacing: 0.03em;
+    color: var(--c);
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 999px;
+    padding: 0.28rem 0.75rem;
+    box-shadow: 0 6px 14px -8px rgba(7, 29, 58, 0.5);
+}
+
+.sv-card.c-teal {
+    --c: var(--accent-text);
+}
+
+/* Body */
+.sv-body {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    padding: 0 1.3rem 1.3rem;
+}
+
+/* icon chip overlaps the photo edge */
+.sv-chip {
+    position: relative;
+    z-index: 3;
+    display: grid;
+    place-items: center;
+    width: 2.9rem;
+    height: 2.9rem;
+    margin: -1.45rem 0 0.8rem;
+    border-radius: 0.75rem;
+    background: var(--c);
+    color: #fff;
+    font-size: 1.3rem;
+    border: 3px solid #fff;
+    box-shadow: 0 8px 18px -10px rgba(7, 29, 58, 0.6);
+}
+
+.sv-body h4 {
+    font-family: var(--font-head);
+    font-weight: 700;
+    font-size: 1.08rem;
+    line-height: 1.3;
+    color: var(--navy);
+    margin: 0 0 0.5rem;
+    transition: color 0.2s ease;
+}
+
+.sv-body p {
+    font-size: 0.92rem;
+    line-height: 1.6;
+    color: var(--muted);
+    margin: 0 0 1.1rem;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+/* Footer + Read more */
+.sv-foot {
+    margin-top: auto;
+    padding-top: 0.9rem;
+    border-top: 1px solid var(--line);
+}
+
+.sv-btn {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    font-weight: 700;
+    font-size: 0.92rem;
+    color: var(--c);
+    text-decoration: none;
+}
+
+/* whole card clickable */
+.sv-btn::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 4;
+}
+
+.sv-btn:focus-visible {
+    outline: none;
+}
+
+.sv-card:has(.sv-btn:focus-visible) {
+    outline: 3px solid var(--accent);
+    outline-offset: 2px;
+}
+
+.sv-btn i {
+    display: grid;
+    place-items: center;
+    width: 2.2rem;
+    height: 2.2rem;
+    border-radius: 50%;
+    border: 2px solid var(--c);
+    font-size: 0.95rem;
+    transition: background-color 0.2s ease, color 0.2s ease, transform 0.25s var(--ease);
+}
+
+.sv-all {
+    justify-content: center;
+    margin-top: clamp(2rem, 5vw, 3rem);
+}
+
+@media (hover: hover) {
+    .sv-card:hover {
+        transform: translateY(-6px);
+        border-color: var(--c);
+        box-shadow: 0 22px 34px -24px rgba(10, 29, 71, 0.65);
+    }
+
+    .sv-card:hover::after {
+        transform: scaleX(1);
+    }
+
+    .sv-card:hover .sv-img img {
+        transform: scale(1.07);
+    }
+
+    .sv-card:hover h4 {
+        color: var(--c);
+    }
+
+    .sv-card:hover .sv-btn i {
+        background: var(--c);
+        color: #fff;
+        transform: translateX(3px);
+    }
+}

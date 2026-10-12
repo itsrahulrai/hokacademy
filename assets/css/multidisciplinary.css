@@ -1,0 +1,453 @@
+
+/* ================= MULTIDISCIPLINARY MODEL =================
+   Uses the existing :root variables, .sec, .eyebrow, .sec-title, .sec-text,
+   .sec-head-center, .wt-ico, .btn-row, button classes and .c-* colour
+   helpers from style.css. Self-contained: does not need the other page CSS. */
+
+/* ---- Intro ---- */
+.md-intro {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 2.5rem;
+  align-items: center;
+}
+
+@media (min-width: 992px) {
+  .md-intro {
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+    gap: 4rem;
+  }
+}
+
+/* Three-line title: last line in the brand blue */
+.md-title {
+  font-family: var(--font-head);
+  font-weight: 800;
+  color: var(--navy);
+  font-size: clamp(1.6rem, 1rem + 2.6vw, 2.8rem);
+  line-height: 1.14;
+  margin-bottom: 1.3rem;
+}
+
+.md-title span {
+  display: block;
+}
+
+.md-title span:last-child {
+  color: var(--primary);
+}
+
+.md-lead {
+  font-family: var(--font-head);
+  font-weight: 700;
+  font-size: clamp(1.08rem, 1rem + 0.5vw, 1.3rem);
+  line-height: 1.45;
+  color: var(--accent-text);
+  padding-left: 1rem;
+  border-left: 3px solid var(--accent);
+  margin-bottom: 1rem;
+}
+
+/* Diagram: three inputs around one platform */
+.md-hub {
+  position: relative;
+  width: 100%;
+  max-width: 26rem;
+  aspect-ratio: 1 / 1;
+  margin-inline: auto;
+}
+
+.md-hub-ring {
+  position: absolute;
+  inset: 11%;
+  border: 2px dashed var(--line-dark);
+  border-radius: 50%;
+}
+
+.md-hub-core {
+  position: absolute;
+  inset: 27%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  text-align: center;
+  border-radius: 50%;
+  background: var(--grad);
+  color: #fff;
+  padding: 0.75rem;
+  box-shadow: 0 22px 40px -22px rgba(11, 95, 174, 0.7);
+}
+
+.md-hub-core i {
+  font-size: clamp(1.5rem, 5vw, 2.2rem);
+  color: var(--accent-light);
+}
+
+.md-hub-core strong {
+  font-family: var(--font-head);
+  font-weight: 700;
+  font-size: clamp(0.85rem, 2.6vw, 1.05rem);
+  line-height: 1.25;
+}
+
+.md-node {
+  position: absolute;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  white-space: nowrap;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 0.5rem 0.95rem;
+  font-weight: 700;
+  font-size: clamp(0.78rem, 2.4vw, 0.92rem);
+  color: var(--navy);
+  box-shadow: var(--shadow);
+}
+
+.md-node i {
+  font-size: 1.1em;
+  color: var(--primary);
+}
+
+.md-node.n1 {
+  top: 4%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.md-node.n2 {
+  bottom: 14%;
+  left: 0;
+}
+
+.md-node.n3 {
+  bottom: 14%;
+  right: 0;
+}
+
+.md-node.n2 i { color: var(--teal); }
+.md-node.n3 i { color: var(--red); }
+
+/* ---- Why ---- */
+.md-why {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 2rem;
+  align-items: start;
+}
+
+@media (min-width: 992px) {
+  .md-why {
+    grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+    gap: 4rem;
+  }
+
+  .md-why-intro {
+    position: sticky;
+    top: calc(var(--nav-h) + 24px);
+  }
+}
+
+.md-why-note {
+  font-family: var(--font-head);
+  font-weight: 700;
+  color: var(--navy);
+  margin: 1.2rem 0 0;
+}
+
+.md-points {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 0.7rem;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+@media (min-width: 576px) {
+  .md-points {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.9rem;
+  }
+}
+
+.md-points li {
+  display: flex;
+  align-items: center;
+  gap: 0.95rem;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 0.9rem;
+  padding: 1rem 1.1rem 1rem 0.95rem;
+  font-weight: 600;
+  font-size: 0.98rem;
+  line-height: 1.45;
+  color: var(--ink);
+  box-shadow: var(--shadow);
+  transition: border-color 0.25s ease, background-color 0.25s ease, transform 0.25s ease;
+}
+
+.md-points .wt-ico {
+  width: 2.75rem;
+  height: 2.75rem;
+  font-size: 1.25rem;
+}
+
+.md-points .wt-ico,
+.md-card .wt-ico,
+.md-disc-ico {
+  transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+/* ---- How our model works ---- */
+.md-how {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 1rem;
+}
+
+@media (min-width: 576px) {
+  .md-how {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 992px) {
+  .md-how {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.25rem;
+  }
+}
+
+.md-card {
+  position: relative;
+  overflow: hidden;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 1rem;
+  padding: 1.6rem 1.45rem 1.7rem;
+  box-shadow: var(--shadow);
+  transition: transform 0.25s ease, border-color 0.25s ease, background-color 0.25s ease;
+}
+
+/* thin colour bar that grows on hover */
+.md-card::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 3px;
+  background: var(--c);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.35s var(--ease);
+}
+
+.md-card h3 {
+  font-family: var(--font-head);
+  font-weight: 700;
+  font-size: 1.1rem;
+  line-height: 1.3;
+  color: var(--c);
+  margin: 1.1rem 0 0.5rem;
+}
+
+.md-card p {
+  font-size: 0.95rem;
+  line-height: 1.65;
+  color: var(--muted);
+  margin: 0;
+}
+
+/* ---- Disciplines ---- */
+.md-disc {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 0.7rem;
+  list-style: none;
+  padding: 0;
+  margin: clamp(1.75rem, 4vw, 2.5rem) 0 0;
+}
+
+@media (min-width: 576px) {
+  .md-disc {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 992px) {
+  .md-disc {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.9rem;
+  }
+}
+
+.md-disc a {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  height: 100%;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 0.9rem;
+  padding: 0.8rem 1rem 0.8rem 0.85rem;
+  font-weight: 600;
+  font-size: 0.96rem;
+  line-height: 1.35;
+  color: var(--navy);
+  text-decoration: none;
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.md-disc a > span:not(.md-disc-ico) {
+  flex: 1;
+  min-width: 0;
+}
+
+.md-disc-ico {
+  width: 2.5rem;
+  height: 2.5rem;
+  display: grid;
+  place-items: center;
+  border-radius: 0.65rem;
+  background: var(--t);
+  color: var(--c);
+  font-size: 1.15rem;
+  flex-shrink: 0;
+}
+
+.md-go {
+  color: var(--c);
+  flex-shrink: 0;
+  transition: transform 0.2s ease;
+}
+
+.md-disc a:focus-visible {
+  border-color: var(--c);
+  background: var(--t);
+}
+
+/* ---- Closing band ---- */
+.md-band {
+  background: var(--grad);
+  color: #dbe7f5;
+  text-align: center;
+  padding: clamp(3rem, 7vw, 5.5rem) 0;
+}
+
+.md-band h2 {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.15rem 1.1rem;
+  font-family: var(--font-head);
+  font-weight: 800;
+  font-size: clamp(1.35rem, 1rem + 2vw, 2.3rem);
+  line-height: 1.25;
+  margin: 0 0 1.1rem;
+}
+
+.md-band h2 span:nth-child(odd) { color: #fff; }
+.md-band h2 span:nth-child(even) { color: var(--accent-light); }
+
+.md-band-text {
+  max-width: 46rem;
+  margin: 0 auto;
+  font-size: 1.03rem;
+  line-height: 1.75;
+}
+
+.md-motto {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 0.75rem;
+  list-style: none;
+  padding: 0;
+  margin: clamp(2rem, 5vw, 3rem) 0;
+}
+
+@media (min-width: 576px) {
+  .md-motto {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 992px) {
+  .md-motto {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 1rem;
+  }
+}
+
+.md-motto li {
+  font-family: var(--font-head);
+  font-weight: 700;
+  font-size: clamp(0.98rem, 0.9rem + 0.4vw, 1.1rem);
+  line-height: 1.3;
+  color: #fff;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: 0.9rem;
+  padding: 1.1rem 0.9rem;
+}
+
+.md-brand {
+  font-family: var(--font-head);
+  font-weight: 800;
+  font-size: clamp(1.4rem, 1.1rem + 1.2vw, 1.9rem);
+  line-height: 1.1;
+  color: #fff;
+  margin-bottom: 0.3rem;
+}
+
+.md-brand-tag {
+  font-weight: 600;
+  color: var(--accent-light);
+  margin-bottom: 1.5rem;
+}
+
+.md-band .btn-row {
+  justify-content: center;
+}
+
+/* ---- Hover (mouse devices only) ---- */
+@media (hover: hover) {
+  .md-points li:hover,
+  .md-card:hover {
+    border-color: var(--c);
+    background: var(--t);
+  }
+
+  .md-points li:hover {
+    transform: translateX(4px);
+  }
+
+  .md-card:hover {
+    transform: translateY(-4px);
+  }
+
+  .md-card:hover::after {
+    transform: scaleX(1);
+  }
+
+  .md-points li:hover .wt-ico,
+  .md-card:hover .wt-ico,
+  .md-disc a:hover .md-disc-ico {
+    background: var(--c);
+    color: #fff;
+  }
+
+  .md-disc a:hover {
+    border-color: var(--c);
+    background: var(--t);
+  }
+
+  .md-disc a:hover .md-go {
+    transform: translateX(4px);
+  }
+}

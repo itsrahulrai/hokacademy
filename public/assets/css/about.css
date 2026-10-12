@@ -1,0 +1,340 @@
+/* ================= ABOUT PAGE =================
+   Uses the existing :root variables, .sec, .eyebrow, .sec-title, .sec-text,
+   .sec-head-center, .sub-title, .wt-ico, .btn-row, button classes and
+   .c-* colour helpers from style.css. */
+
+/* ---- Page hero ---- */
+.ab-hero {
+    background:
+        linear-gradient(rgba(6, 23, 51, 0.78), rgba(6, 23, 51, 0.78)),
+        url('../img/bg-3.webp') center center / cover no-repeat;
+    color: #dbe7f5;
+    padding: clamp(2.5rem, 7vw, 5rem) 0 clamp(2.75rem, 7vw, 5.25rem);
+}
+
+.ab-crumb {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    list-style: none;
+    padding: 0;
+    margin: 0 0 clamp(0.5rem, 4vw, 1.5rem);
+    font-size: 0.88rem;
+}
+
+.ab-crumb li+li::before {
+    content: "/";
+    margin-right: 0.5rem;
+    opacity: 0.6;
+}
+
+.ab-crumb a {
+    color: var(--accent-light);
+    text-decoration: none;
+}
+
+.ab-crumb a:hover,
+.ab-crumb a:focus-visible {
+    color: #fff;
+    text-decoration: underline;
+}
+
+.ab-hero-label,
+.ab-vision-label {
+    font-family: var(--font-head);
+    font-weight: 700;
+    font-size: 0.8rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent-light);
+    margin-bottom: 0.9rem;
+}
+
+.ab-hero h1 {
+    font-family: var(--font-head);
+    font-weight: 800;
+    color: #fff;
+    font-size: clamp(1.75rem, 1.1rem + 3vw, 3.2rem);
+    line-height: 1.12;
+    max-width: 18ch;
+    margin-bottom: 1.3rem;
+}
+
+.ab-hero-tag {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.2rem 1.1rem;
+    font-family: var(--font-head);
+    font-weight: 600;
+    font-size: clamp(1rem, 0.92rem + 0.5vw, 1.25rem);
+    line-height: 1.4;
+    margin: 0;
+}
+
+.ab-hero-tag span:nth-child(odd) {
+    color: #fff;
+}
+
+.ab-hero-tag span:nth-child(even) {
+    color: var(--accent-light);
+}
+
+/* ---- Who we are ---- */
+.ab-lead {
+    font-family: var(--font-head);
+    font-weight: 700;
+    font-size: clamp(1.08rem, 1rem + 0.5vw, 1.28rem);
+    line-height: 1.45;
+    color: var(--accent-text);
+    margin: 1.2rem 0 0.9rem;
+}
+
+.ab-photo {
+    position: relative;
+    margin: 0;
+    aspect-ratio: 4 / 3;
+    border-radius: 1rem;
+    border-bottom-left-radius: clamp(3rem, 8vw, 6rem);
+    overflow: hidden;
+    background: linear-gradient(135deg, var(--primary), var(--teal));
+    display: grid;
+    place-items: center;
+    box-shadow: var(--shadow);
+}
+
+.ab-photo img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 1;
+}
+
+.ab-photo-fb {
+    font-size: clamp(4rem, 12vw, 7rem);
+    color: rgba(255, 255, 255, 0.85);
+}
+
+.ab-photo img~.ab-photo-fb {
+    display: none;
+}
+
+/* ---- Multidisciplinary model: discipline list ---- */
+.ab-sub {
+    margin: clamp(2.25rem, 5vw, 3.25rem) 0 1.2rem;
+}
+
+.ab-disc {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0.7rem;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+@media (min-width: 576px) {
+    .ab-disc {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (min-width: 992px) {
+    .ab-disc {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 0.9rem;
+    }
+}
+
+.ab-disc li {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 0.85rem;
+    padding: 0.75rem 1rem 0.75rem 0.8rem;
+    font-weight: 600;
+    font-size: 0.96rem;
+    line-height: 1.35;
+    color: var(--navy);
+}
+
+.ab-disc-ico {
+    width: 2.5rem;
+    height: 2.5rem;
+    display: grid;
+    place-items: center;
+    border-radius: 0.65rem;
+    background: var(--t);
+    color: var(--c);
+    font-size: 1.15rem;
+    flex-shrink: 0;
+}
+
+.ab-note {
+    max-width: 52rem;
+    margin: clamp(1.75rem, 4vw, 2.5rem) 0 0;
+    padding-left: 1.1rem;
+    border-left: 3px solid var(--accent);
+    color: var(--text);
+    font-size: 1.02rem;
+    line-height: 1.75;
+}
+
+/* ---- Learning philosophy: 8 cards ---- */
+.ab-phil {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 1rem;
+}
+
+@media (min-width: 576px) {
+    .ab-phil {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (min-width: 1200px) {
+    .ab-phil {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 1.25rem;
+    }
+}
+
+.ab-phil-item {
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 1rem;
+    padding: 1.5rem 1.35rem;
+    box-shadow: var(--shadow);
+}
+
+.ab-phil-item h3 {
+    font-family: var(--font-head);
+    font-weight: 700;
+    font-size: 1.06rem;
+    line-height: 1.3;
+    color: var(--c);
+    margin: 1rem 0 0.45rem;
+}
+
+.ab-phil-item p {
+    font-size: 0.94rem;
+    line-height: 1.6;
+    color: var(--muted);
+    margin: 0;
+}
+
+/* Linked from the menu (about.html#scientific etc.): highlight the card that was jumped to */
+.ab-phil-item:target {
+    border-color: var(--c);
+    background: var(--t);
+}
+
+/* ---- Academic vision panel ---- */
+.ab-vision {
+    background: var(--grad);
+    color: #dbe7f5;
+    border-radius: 1rem;
+    padding: clamp(1.75rem, 5vw, 3.5rem);
+}
+
+.ab-vision h2 {
+    font-family: var(--font-head);
+    font-weight: 700;
+    color: #fff;
+    font-size: clamp(1.4rem, 1rem + 2vw, 2.3rem);
+    line-height: 1.18;
+    max-width: 24ch;
+    margin-bottom: 1.2rem;
+}
+
+.ab-vision>p:not(.ab-vision-label) {
+    font-size: 1.02rem;
+    line-height: 1.75;
+    max-width: 46rem;
+    margin-bottom: 0.8rem;
+}
+
+.ab-motto {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0.75rem;
+    list-style: none;
+    padding: 0;
+    margin: clamp(1.75rem, 4vw, 2.5rem) 0 0;
+}
+
+@media (min-width: 576px) {
+    .ab-motto {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (min-width: 992px) {
+    .ab-motto {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 1rem;
+    }
+}
+
+.ab-motto li {
+    font-family: var(--font-head);
+    font-weight: 700;
+    font-size: clamp(0.98rem, 0.9rem + 0.4vw, 1.1rem);
+    line-height: 1.3;
+    color: #fff;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.22);
+    border-radius: 0.85rem;
+    padding: 1rem;
+}
+
+/* ---- From India to the world ---- */
+.ab-world {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 2rem;
+    align-items: center;
+}
+
+@media (min-width: 992px) {
+    .ab-world {
+        grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr);
+        gap: 4rem;
+    }
+}
+
+.ab-brand-card {
+    background: var(--t-blue);
+    border-radius: 1rem;
+    padding: clamp(1.75rem, 4vw, 2.75rem);
+    text-align: center;
+}
+
+.ab-brand-ico {
+    font-size: 2.6rem;
+    line-height: 1;
+    color: var(--primary);
+}
+
+.ab-brand {
+    font-family: var(--font-head);
+    font-weight: 800;
+    font-size: clamp(1.5rem, 1.2rem + 1.2vw, 2rem);
+    line-height: 1.1;
+    color: var(--navy);
+    margin: 0.9rem 0 0.35rem;
+}
+
+.ab-brand-tag {
+    font-weight: 600;
+    color: var(--accent-text);
+    margin-bottom: 1.5rem;
+}
+
+.ab-brand-card .btn-row {
+    justify-content: center;
+}
