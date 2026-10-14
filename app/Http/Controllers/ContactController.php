@@ -41,8 +41,10 @@ class ContactController extends Controller
 
         // If honeypot filled by bot, quietly redirect with fake success
         if (!empty($request->website)) {
-            return back()->with('success', 'Thank you! Your enquiry has been received.');
+            return redirect()->route('thank.you');
         }
+
+        $programName = $request->input('interest') ?? $request->input('program_name');
 
         Inquiry::create([
             'name' => $validated['name'],
@@ -50,12 +52,22 @@ class ContactController extends Controller
             'phone' => $validated['phone'],
             'country' => $validated['country'] ?? null,
             'profession_role' => $request->input('role') ?? $request->input('profession_role'),
-            'program_name' => $request->input('interest') ?? $request->input('program_name'),
+            'program_name' => $programName,
             'message' => $validated['message'] ?? null,
             'ip_address' => $request->ip(),
             'status' => 'new',
         ]);
 
-        return back()->with('success', 'Thank you for reaching out! Our academic advisory team will contact you shortly.');
+        return redirect()->route('thank.you')->with([
+            'submitted' => true,
+            'name' => $validated['name'],
+            'program_name' => $programName,
+            'email' => $validated['email'],
+        ]);
+    }
+
+    public function thankYou()
+    {
+        return view('frontend.thank-you');
     }
 }

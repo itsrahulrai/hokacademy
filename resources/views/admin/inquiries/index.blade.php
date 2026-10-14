@@ -93,6 +93,10 @@
                         </td>
                         <td class="text-end text-nowrap">
                             <div class="table-actions">
+                                <a href="{{ route('admin.inquiries.show', $inq->id) }}#reply-card" class="btn btn-sm btn-primary rounded-pill px-3 fw-semibold d-inline-flex align-items-center gap-1 shadow-sm" style="font-size: 0.8rem;" title="Direct Email Reply">
+                                    <i class="bi bi-reply-fill"></i>
+                                    <span>Reply</span>
+                                </a>
                                 <a href="{{ route('admin.inquiries.show', $inq->id) }}" class="btn btn-sm btn-light border rounded-pill px-3 fw-semibold d-inline-flex align-items-center gap-1" style="color: var(--hok-navy); font-size: 0.8rem;">
                                     <i class="bi bi-eye"></i>
                                     <span>Details</span>

@@ -49,6 +49,7 @@ Route::get('/blog/{slug}', [BlogController::class, 'show'])->name('blog.show');
 // Contact
 Route::get('/contact-us', [ContactController::class, 'index'])->name('contact.index');
 Route::post('/contact-submit', [ContactController::class, 'submit'])->name('contact.submit');
+Route::get('/thank-you', [ContactController::class, 'thankYou'])->name('thank.you');
 
 // Legacy 301 Redirects for .php extensions
 Route::redirect('/index.php', '/', 301);
@@ -62,6 +63,7 @@ Route::redirect('/faculty.php', '/faculty', 301);
 Route::redirect('/international.php', '/international', 301);
 Route::redirect('/blog.php', '/blog', 301);
 Route::redirect('/contact-us.php', '/contact-us', 301);
+Route::redirect('/thank-you.php', '/thank-you', 301);
 
 
 /*
@@ -90,6 +92,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/inquiries', [AdminInquiryController::class, 'index'])->name('inquiries.index');
         Route::get('/inquiries/{inquiry}', [AdminInquiryController::class, 'show'])->name('inquiries.show');
         Route::patch('/inquiries/{inquiry}/status', [AdminInquiryController::class, 'updateStatus'])->name('inquiries.status');
+        Route::post('/inquiries/{inquiry}/reply', [AdminInquiryController::class, 'sendReply'])->name('inquiries.reply');
+        Route::post('/inquiries/{inquiry}/ai-generate', [AdminInquiryController::class, 'generateAiReply'])->name('inquiries.ai-generate');
         Route::delete('/inquiries/{inquiry}', [AdminInquiryController::class, 'destroy'])->name('inquiries.destroy');
 
         // Programs & Categories
@@ -114,6 +118,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
         // Website Global Settings
         Route::get('/settings', [AdminSettingController::class, 'index'])->name('settings.index');
         Route::post('/settings', [AdminSettingController::class, 'update'])->name('settings.update');
+        Route::post('/settings/test-email', [AdminSettingController::class, 'sendTestEmail'])->name('settings.test-email');
 
         // Admin Profile
         Route::get('/profile', [AdminProfileController::class, 'index'])->name('profile');

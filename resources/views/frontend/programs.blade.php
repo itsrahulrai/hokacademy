@@ -51,15 +51,15 @@
                 @foreach ($categories as $g)
                     @foreach ($g->programs as $prog)
                         <article class="sv-card {{ $g->tone_class }}" data-cat="{{ $g->slug }}">
-                            <div class="sv-img">
+                            <a href="{{ route('programs.show', $prog->slug) }}" class="sv-img" aria-label="{{ $prog->title }}">
                                 <img src="{{ $prog->image_url }}" width="640" height="400" loading="lazy"
                                     alt="{{ $prog->title }}" onerror="this.remove()">
                                 <i class="bi {{ $g->icon }} sv-fallback"></i>
                                 <span class="sv-tag">{{ $g->short_name }}</span>
-                            </div>
+                            </a>
                             <div class="sv-body">
                                 <span class="sv-chip"><i class="bi {{ $prog->icon ?? $g->icon }}"></i></span>
-                                <h4>{{ $prog->title }}</h4>
+                                <h4><a href="{{ route('programs.show', $prog->slug) }}" class="text-reset text-decoration-none">{{ $prog->title }}</a></h4>
                                 <p>{{ $prog->short_description }}</p>
                                 <div class="sv-foot">
                                     <a href="{{ route('programs.show', $prog->slug) }}"

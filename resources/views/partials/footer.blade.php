@@ -51,21 +51,21 @@
             <div>
                 <h4>Programs for</h4>
                 <ul>
-                    <li><a href="{{ route('programs.index') }}" data-tab="wt-tab-doc">Doctors &amp; Medical Professionals</a></li>
-                    <li><a href="{{ route('programs.index') }}" data-tab="wt-tab-pmu">PMU &amp; Aesthetic Professionals</a></li>
-                    <li><a href="{{ route('programs.index') }}" data-tab="wt-tab-nur">Nursing, OT &amp; Paramedical</a></li>
-                    <li><a href="{{ route('programs.index') }}" data-tab="wt-tab-las">Aesthetic &amp; Laser Technicians</a></li>
+                    <li><a href="{{ route('programs.index', ['category' => 'doctors']) }}" data-tab="wt-tab-doc">Doctors &amp; Medical Professionals</a></li>
+                    <li><a href="{{ route('programs.index', ['category' => 'pmu']) }}" data-tab="wt-tab-pmu">PMU &amp; Aesthetic Professionals</a></li>
+                    <li><a href="{{ route('programs.index', ['category' => 'nursing']) }}" data-tab="wt-tab-nur">Nursing, OT &amp; Paramedical</a></li>
+                    <li><a href="{{ route('programs.index', ['category' => 'technicians']) }}" data-tab="wt-tab-las">Aesthetic &amp; Laser Technicians</a></li>
                     <li><a href="{{ route('programs.index') }}">All programs</a></li>
                 </ul>
             </div>
             <div>
                 <h4>Disciplines</h4>
                 <ul>
-                    <li><a href="{{ route('programs.index') }}">Aesthetic &amp; Cosmetic Medicine</a></li>
-                    <li><a href="{{ route('programs.index') }}">Laser &amp; Energy-Based Medicine</a></li>
-                    <li><a href="{{ route('programs.index') }}">Hair Restoration</a></li>
-                    <li><a href="{{ route('programs.index') }}">Urology &amp; Endourology</a></li>
-                    <li><a href="{{ route('programs.index') }}">General Surgery</a></li>
+                    <li><a href="{{ route('programs.show', 'aesthetic-cosmetic-medicine') }}">Aesthetic &amp; Cosmetic Medicine</a></li>
+                    <li><a href="{{ route('programs.show', 'laser-energy-based-medicine') }}">Laser &amp; Energy-Based Medicine</a></li>
+                    <li><a href="{{ route('programs.show', 'hair-restoration-transplantation') }}">Hair Restoration</a></li>
+                    <li><a href="{{ route('programs.show', 'urology-endourology') }}">Urology &amp; Endourology</a></li>
+                    <li><a href="{{ route('programs.show', 'general-surgery') }}">General Surgery</a></li>
                 </ul>
             </div>
             <div>

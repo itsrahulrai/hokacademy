@@ -4,71 +4,76 @@
 
 @push('styles')
 <style>
-    /* ---- Impressive Settings Navigation Tabs ---- */
-    .settings-nav-wrapper {
+    /* ---- Vertical Settings Navigation Tabs (Left Sidebar) ---- */
+    .settings-nav-vertical {
         background: #ffffff;
-        padding: 8px;
+        padding: 10px;
         border-radius: 16px;
         border: 1px solid var(--admin-card-border);
         box-shadow: 0 4px 20px rgba(7, 29, 58, 0.04);
         display: flex;
-        flex-wrap: wrap;
+        flex-direction: column;
         gap: 6px;
-        margin-bottom: 1.75rem;
     }
 
-    .settings-tab-btn {
-        display: inline-flex;
+    .settings-tab-btn-vertical {
+        display: flex;
         align-items: center;
         gap: 12px;
-        padding: 10px 20px;
+        padding: 12px 14px;
         border-radius: 12px;
         border: 1px solid transparent;
         background: transparent;
         color: #475569;
         font-weight: 600;
-        font-size: 0.92rem;
+        font-size: 0.9rem;
         transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
         cursor: pointer;
         text-align: left;
+        width: 100%;
+        text-decoration: none;
     }
 
-    .settings-tab-btn .tab-icon {
-        width: 34px;
-        height: 34px;
+    .settings-tab-btn-vertical .tab-icon {
+        width: 36px;
+        height: 36px;
         border-radius: 10px;
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        font-size: 1.05rem;
+        font-size: 1.1rem;
         background: rgba(7, 29, 58, 0.05);
         color: var(--hok-navy);
         transition: all 0.25s ease;
         flex-shrink: 0;
     }
 
-    .settings-tab-btn:hover {
+    .settings-tab-btn-vertical:hover {
         background: #f8fafc;
         color: var(--hok-navy);
-        transform: translateY(-1px);
+        transform: translateX(3px);
     }
 
-    .settings-tab-btn:hover .tab-icon {
+    .settings-tab-btn-vertical:hover .tab-icon {
         background: rgba(197, 155, 39, 0.15);
         color: var(--hok-gold-dark);
     }
 
-    .settings-tab-btn.active {
+    .settings-tab-btn-vertical.active {
         background: linear-gradient(135deg, var(--hok-navy-deep) 0%, var(--hok-navy) 50%, var(--hok-navy-mid) 100%);
         color: #ffffff !important;
         box-shadow: 0 6px 20px rgba(7, 29, 58, 0.22);
         border-color: rgba(212, 175, 55, 0.35);
     }
 
-    .settings-tab-btn.active .tab-icon {
+    .settings-tab-btn-vertical.active .tab-icon {
         background: var(--hok-gold-grad);
         color: var(--hok-navy-deep);
         box-shadow: 0 2px 10px rgba(197, 155, 39, 0.4);
+    }
+
+    .settings-tab-btn-vertical.active small {
+        color: rgba(255, 255, 255, 0.8) !important;
     }
 
     /* ---- Card Section Headers ---- */
@@ -191,51 +196,76 @@
 <form action="{{ route('admin.settings.update') }}" method="POST" enctype="multipart/form-data">
     @csrf
 
-    <!-- Impressive Segmented Tabs Bar -->
-    <div class="settings-nav-wrapper nav nav-pills" id="settingsTabs" role="tablist">
-        <button class="settings-tab-btn active" id="general-tab" data-bs-toggle="pill" data-bs-target="#general" type="button" role="tab" aria-selected="true">
-            <span class="tab-icon"><i class="bi bi-sliders"></i></span>
-            <span>
-                <span class="d-block lh-1">General &amp; Branding</span>
-                <small class="text-muted d-none d-lg-inline" style="font-size: 0.72rem; opacity: 0.85;">Identity &amp; Logos</small>
-            </span>
-        </button>
+    <div class="row g-4 mb-4">
+        <!-- Left Column: Settings Category Tabs (Vertical Sidebar) -->
+        <div class="col-lg-4 col-xl-3">
+            <div class="settings-sidebar-wrapper sticky-top" style="top: 85px; z-index: 10;">
+                <div class="settings-nav-vertical nav nav-pills flex-column" id="settingsTabs" role="tablist">
+                    <button class="settings-tab-btn-vertical active" id="general-tab" data-bs-toggle="pill" data-bs-target="#general" type="button" role="tab" aria-selected="true">
+                        <span class="tab-icon"><i class="bi bi-sliders"></i></span>
+                        <span>
+                            <span class="d-block lh-1">General &amp; Branding</span>
+                            <small class="text-muted d-block mt-1" style="font-size: 0.72rem;">Identity &amp; Logos</small>
+                        </span>
+                    </button>
 
-        <button class="settings-tab-btn" id="contact-tab" data-bs-toggle="pill" data-bs-target="#contact" type="button" role="tab" aria-selected="false">
-            <span class="tab-icon"><i class="bi bi-geo-alt"></i></span>
-            <span>
-                <span class="d-block lh-1">Contact &amp; Location</span>
-                <small class="text-muted d-none d-lg-inline" style="font-size: 0.72rem; opacity: 0.85;">Phones, Email, Address</small>
-            </span>
-        </button>
+                    <button class="settings-tab-btn-vertical" id="contact-tab" data-bs-toggle="pill" data-bs-target="#contact" type="button" role="tab" aria-selected="false">
+                        <span class="tab-icon"><i class="bi bi-geo-alt"></i></span>
+                        <span>
+                            <span class="d-block lh-1">Contact &amp; Location</span>
+                            <small class="text-muted d-block mt-1" style="font-size: 0.72rem;">Phones, Email, Address</small>
+                        </span>
+                    </button>
 
-        <button class="settings-tab-btn" id="headerfooter-tab" data-bs-toggle="pill" data-bs-target="#headerfooter" type="button" role="tab" aria-selected="false">
-            <span class="tab-icon"><i class="bi bi-layout-text-window-reverse"></i></span>
-            <span>
-                <span class="d-block lh-1">Header &amp; Footer</span>
-                <small class="text-muted d-none d-lg-inline" style="font-size: 0.72rem; opacity: 0.85;">CTA, Badges, Copyright</small>
-            </span>
-        </button>
+                    <button class="settings-tab-btn-vertical" id="headerfooter-tab" data-bs-toggle="pill" data-bs-target="#headerfooter" type="button" role="tab" aria-selected="false">
+                        <span class="tab-icon"><i class="bi bi-layout-text-window-reverse"></i></span>
+                        <span>
+                            <span class="d-block lh-1">Header &amp; Footer</span>
+                            <small class="text-muted d-block mt-1" style="font-size: 0.72rem;">CTA, Badges, Copyright</small>
+                        </span>
+                    </button>
 
-        <button class="settings-tab-btn" id="social-tab" data-bs-toggle="pill" data-bs-target="#social" type="button" role="tab" aria-selected="false">
-            <span class="tab-icon"><i class="bi bi-share"></i></span>
-            <span>
-                <span class="d-block lh-1">Social Media</span>
-                <small class="text-muted d-none d-lg-inline" style="font-size: 0.72rem; opacity: 0.85;">Official Social Profiles</small>
-            </span>
-        </button>
+                    <button class="settings-tab-btn-vertical" id="social-tab" data-bs-toggle="pill" data-bs-target="#social" type="button" role="tab" aria-selected="false">
+                        <span class="tab-icon"><i class="bi bi-share"></i></span>
+                        <span>
+                            <span class="d-block lh-1">Social Media</span>
+                            <small class="text-muted d-block mt-1" style="font-size: 0.72rem;">Official Profiles</small>
+                        </span>
+                    </button>
 
-        <button class="settings-tab-btn" id="scripts-tab" data-bs-toggle="pill" data-bs-target="#scripts" type="button" role="tab" aria-selected="false">
-            <span class="tab-icon"><i class="bi bi-code-slash"></i></span>
-            <span>
-                <span class="d-block lh-1">Custom Scripts &amp; Analytics</span>
-                <small class="text-muted d-none d-lg-inline" style="font-size: 0.72rem; opacity: 0.85;">GTM, Meta Pixel, Chat</small>
-            </span>
-        </button>
-    </div>
+                    <button class="settings-tab-btn-vertical" id="smtp-tab" data-bs-toggle="pill" data-bs-target="#smtp" type="button" role="tab" aria-selected="false">
+                        <span class="tab-icon"><i class="bi bi-envelope-at"></i></span>
+                        <span>
+                            <span class="d-block lh-1">Email &amp; SMTP</span>
+                            <small class="text-muted d-block mt-1" style="font-size: 0.72rem;">Outgoing Mail &amp; AI</small>
+                        </span>
+                    </button>
 
-    <!-- Tab Contents -->
-    <div class="tab-content" id="settingsTabContent">
+                    <button class="settings-tab-btn-vertical" id="scripts-tab" data-bs-toggle="pill" data-bs-target="#scripts" type="button" role="tab" aria-selected="false">
+                        <span class="tab-icon"><i class="bi bi-code-slash"></i></span>
+                        <span>
+                            <span class="d-block lh-1">Custom Scripts &amp; Analytics</span>
+                            <small class="text-muted d-block mt-1" style="font-size: 0.72rem;">GTM, Meta Pixel, Chat</small>
+                        </span>
+                    </button>
+                </div>
+
+                <div class="mt-3 p-3 rounded-3 bg-white border shadow-2xs d-none d-lg-block" style="border-radius: 14px;">
+                    <div class="d-flex align-items-center gap-2 mb-1.5">
+                        <span class="badge bg-success-subtle text-success border border-success-subtle rounded-pill px-2 py-0.5" style="font-size: 0.72rem;">
+                            <i class="bi bi-shield-check me-1"></i> Live Auto-Sync
+                        </span>
+                    </div>
+                    <p class="small text-muted mb-0" style="font-size: 0.76rem; line-height: 1.5;">
+                        Changes saved here apply immediately across all frontend pages, footers, headers, and forms.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Column: Content Panels & Forms -->
+        <div class="col-lg-8 col-xl-9">
+            <div class="tab-content" id="settingsTabContent">
         
         <!-- 1. GENERAL & BRANDING -->
         <div class="tab-pane fade show active" id="general" role="tabpanel">
@@ -507,7 +537,160 @@
             </div>
         </div>
 
-        <!-- 5. SCRIPTS & ANALYTICS -->
+        <!-- 5. EMAIL & SMTP CONFIGURATION -->
+        <div class="tab-pane fade" id="smtp" role="tabpanel">
+            <div class="card card-custom p-4 mb-4">
+                <div class="d-flex align-items-center justify-content-between pb-3 mb-4 border-bottom flex-wrap gap-2">
+                    <div class="d-flex align-items-center gap-3">
+                        <div class="sec-badge-icon" style="color: #0d6efd;">
+                            <i class="bi bi-envelope-at-fill"></i>
+                        </div>
+                        <div>
+                            <h5 class="fw-bold mb-0" style="color: var(--hok-navy);">Email &amp; SMTP Configuration</h5>
+                            <p class="text-muted small mb-0">Configure your outgoing email server to send direct inquiry replies directly from the dashboard.</p>
+                        </div>
+                    </div>
+                    <span class="badge bg-primary-subtle text-primary border border-primary-subtle px-3 py-2 rounded-pill small">
+                        <i class="bi bi-send-check me-1"></i>Direct Mail Engine
+                    </span>
+                </div>
+
+                <div class="alert alert-info border-0 rounded-3 d-flex align-items-start gap-3 p-3 mb-4" style="background: rgba(13, 110, 253, 0.08);">
+                    <i class="bi bi-info-circle-fill text-primary fs-5 mt-1 flex-shrink-0"></i>
+                    <div class="small">
+                        <strong>SMTP Outgoing Setup:</strong> Once configured, all replies you write in the <em>Inquiries Dashboard</em> are delivered directly to the inquirer's inbox via this SMTP server. If left blank, local environment defaults will be used safely.
+                    </div>
+                </div>
+
+                <div class="row g-4 mb-4">
+                    <div class="col-md-4">
+                        <label class="form-label small fw-semibold">Mail Protocol / Driver</label>
+                        <select name="smtp_mailer" class="form-select form-control-elevated">
+                            @php $mailerVal = \App\Models\Setting::get('smtp_mailer', 'smtp'); @endphp
+                            <option value="smtp" {{ $mailerVal === 'smtp' ? 'selected' : '' }}>SMTP (Recommended)</option>
+                            <option value="sendmail" {{ $mailerVal === 'sendmail' ? 'selected' : '' }}>Sendmail</option>
+                            <option value="log" {{ $mailerVal === 'log' ? 'selected' : '' }}>Log (Debug / Local File)</option>
+                        </select>
+                        <small class="text-muted" style="font-size: 0.75rem;">Select 'SMTP' for live outbound delivery.</small>
+                    </div>
+
+                    <div class="col-md-5">
+                        <label class="form-label small fw-semibold">SMTP Host / Server <span class="text-danger">*</span></label>
+                        <div class="input-group">
+                            <span class="input-group-text input-group-text-custom"><i class="bi bi-server"></i></span>
+                            <input type="text" name="smtp_host" class="form-control form-control-elevated" value="{{ \App\Models\Setting::get('smtp_host', config('mail.mailers.smtp.host')) }}" placeholder="e.g. smtp.gmail.com or mail.hokacademy.com">
+                        </div>
+                        <small class="text-muted" style="font-size: 0.75rem;">Your SMTP mail server address.</small>
+                    </div>
+
+                    <div class="col-md-3">
+                        <label class="form-label small fw-semibold">SMTP Port <span class="text-danger">*</span></label>
+                        <div class="input-group">
+                            <span class="input-group-text input-group-text-custom"><i class="bi bi-hash"></i></span>
+                            <input type="number" name="smtp_port" class="form-control form-control-elevated" value="{{ \App\Models\Setting::get('smtp_port', config('mail.mailers.smtp.port', 587)) }}" placeholder="587">
+                        </div>
+                        <small class="text-muted" style="font-size: 0.75rem;">Common: 587 (TLS), 465 (SSL), 25.</small>
+                    </div>
+
+                    <div class="col-md-4">
+                        <label class="form-label small fw-semibold">Encryption</label>
+                        <select name="smtp_encryption" class="form-select form-control-elevated">
+                            @php $encVal = \App\Models\Setting::get('smtp_encryption', config('mail.mailers.smtp.encryption', 'tls')); @endphp
+                            <option value="tls" {{ $encVal === 'tls' ? 'selected' : '' }}>TLS (Port 587 - Standard)</option>
+                            <option value="ssl" {{ $encVal === 'ssl' ? 'selected' : '' }}>SSL (Port 465)</option>
+                            <option value="none" {{ $encVal === 'none' ? 'selected' : '' }}>None (Unencrypted)</option>
+                        </select>
+                    </div>
+
+                    <div class="col-md-4">
+                        <label class="form-label small fw-semibold">SMTP Username / Email <span class="text-danger">*</span></label>
+                        <div class="input-group">
+                            <span class="input-group-text input-group-text-custom"><i class="bi bi-person"></i></span>
+                            <input type="text" name="smtp_username" class="form-control form-control-elevated" value="{{ \App\Models\Setting::get('smtp_username', config('mail.mailers.smtp.username')) }}" placeholder="user@hokacademy.com">
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <label class="form-label small fw-semibold">SMTP Password / App Password <span class="text-danger">*</span></label>
+                        <div class="input-group">
+                            <span class="input-group-text input-group-text-custom"><i class="bi bi-key"></i></span>
+                            <input type="password" id="smtpPasswordField" name="smtp_password" class="form-control form-control-elevated" value="{{ \App\Models\Setting::get('smtp_password', config('mail.mailers.smtp.password')) }}" placeholder="••••••••••••">
+                            <button type="button" class="btn btn-outline-secondary" onclick="togglePasswordVisibility('smtpPasswordField')">
+                                <i class="bi bi-eye"></i>
+                            </button>
+                        </div>
+                        <small class="text-muted" style="font-size: 0.75rem;">For Gmail, generate an 'App Password'.</small>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="form-label small fw-semibold">Sender Email (From Address)</label>
+                        <div class="input-group">
+                            <span class="input-group-text input-group-text-custom"><i class="bi bi-envelope"></i></span>
+                            <input type="email" name="smtp_from_address" class="form-control form-control-elevated" value="{{ \App\Models\Setting::get('smtp_from_address', \App\Models\Setting::get('contact_email', config('mail.from.address', 'hokacademy@yahoo.com'))) }}" placeholder="hokacademy@yahoo.com">
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="form-label small fw-semibold">Sender Display Name</label>
+                        <div class="input-group">
+                            <span class="input-group-text input-group-text-custom"><i class="bi bi-tag"></i></span>
+                            <input type="text" name="smtp_from_name" class="form-control form-control-elevated" value="{{ \App\Models\Setting::get('smtp_from_name', \App\Models\Setting::get('site_title', config('mail.from.name', 'HOK Academy'))) }}" placeholder="HOK Academy">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Live Test Email Box -->
+                <div class="p-3 rounded-3 border bg-light-subtle mt-2">
+                    <div class="d-flex align-items-center justify-content-between flex-wrap gap-2 mb-2">
+                        <h6 class="fw-bold mb-0 text-dark">
+                            <i class="bi bi-lightning-charge-fill text-warning me-1"></i> Send Test Verification Email
+                        </h6>
+                        <span class="small text-muted">Verify your SMTP credentials before replying to inquiries</span>
+                    </div>
+                    <div class="row g-2 align-items-center">
+                        <div class="col-md-8">
+                            <div class="input-group">
+                                <span class="input-group-text bg-white"><i class="bi bi-send text-muted"></i></span>
+                                <input type="email" id="testEmailRecipient" class="form-control" placeholder="Enter test recipient email (e.g. your email address)..." value="{{ \App\Models\Setting::get('contact_email', 'hokacademy@yahoo.com') }}">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <button type="button" class="btn btn-outline-primary w-100 fw-semibold" id="btnSendTestEmail" onclick="sendTestEmailAjax()">
+                                <i class="bi bi-send me-1"></i> Send Test Email Now
+                            </button>
+                        </div>
+                    </div>
+                    <div id="testEmailStatusAlert" class="mt-2" style="display: none;"></div>
+                </div>
+
+                <!-- AI Assistant API Key Configuration -->
+                <div class="p-3 rounded-3 border bg-light-subtle mt-4">
+                    <div class="d-flex align-items-center justify-content-between flex-wrap gap-2 mb-2">
+                        <div class="d-flex align-items-center gap-2">
+                            <span class="badge rounded-pill px-2.5 py-1 text-dark" style="background: var(--hok-gold-grad); font-weight: 700;">
+                                <i class="bi bi-stars me-1 text-dark"></i> AI Email Assistant
+                            </span>
+                            <h6 class="fw-bold mb-0 text-dark">Google Gemini API Key (Optional)</h6>
+                        </div>
+                        <a href="https://aistudio.google.com/app/apikey" target="_blank" class="small text-primary text-decoration-none fw-semibold">
+                            <i class="bi bi-box-arrow-up-right me-1"></i> Get Free Key from Google AI Studio
+                        </a>
+                    </div>
+                    <p class="text-muted small mb-2">
+                        Power 1-click generative AI email replies in the Inquiries dashboard with Google Gemini. If left blank, HOK Academy's built-in smart AI engine will generate contextual replies automatically with zero setup.
+                    </p>
+                    <div class="input-group">
+                        <span class="input-group-text bg-white"><i class="bi bi-key-fill text-warning"></i></span>
+                        <input type="password" id="geminiApiKeyField" name="gemini_api_key" class="form-control" placeholder="AIzaSy..." value="{{ \App\Models\Setting::get('gemini_api_key') }}">
+                        <button type="button" class="btn btn-outline-secondary" onclick="togglePasswordVisibility('geminiApiKeyField')">
+                            <i class="bi bi-eye"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 6. SCRIPTS & ANALYTICS -->
         <div class="tab-pane fade" id="scripts" role="tabpanel">
             <div class="card card-custom p-4 mb-4">
                 <div class="d-flex align-items-center justify-content-between pb-3 mb-4 border-bottom flex-wrap gap-2">
@@ -551,6 +734,8 @@
             </div>
         </div>
     </div>
+</div>
+</div>
 
     <!-- Sticky Floating Save Bar -->
     <div class="settings-action-bar mb-5">
@@ -571,3 +756,63 @@
     </div>
 </form>
 @endsection
+
+@push('scripts')
+<script>
+function togglePasswordVisibility(fieldId) {
+    const field = document.getElementById(fieldId);
+    if (!field) return;
+    if (field.type === 'password') {
+        field.type = 'text';
+    } else {
+        field.type = 'password';
+    }
+}
+
+function sendTestEmailAjax() {
+    const emailInput = document.getElementById('testEmailRecipient');
+    const alertBox = document.getElementById('testEmailStatusAlert');
+    const sendBtn = document.getElementById('btnSendTestEmail');
+
+    if (!emailInput || !emailInput.value.trim()) {
+        alert('Please enter a recipient email address for testing.');
+        return;
+    }
+
+    const recipient = emailInput.value.trim();
+    sendBtn.disabled = true;
+    sendBtn.innerHTML = '<span class="spinner-border spinner-border-sm me-1"></span> Sending Test Email...';
+    alertBox.style.display = 'block';
+    alertBox.className = 'alert alert-info py-2 px-3 small mb-0 mt-2';
+    alertBox.innerHTML = '<i class="bi bi-hourglass-split me-1"></i> Connecting to SMTP server and transmitting test email...';
+
+    fetch("{{ route('admin.settings.test-email') }}", {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRF-TOKEN': '{{ csrf_token() }}',
+            'Accept': 'application/json'
+        },
+        body: JSON.stringify({ test_email: recipient })
+    })
+    .then(async response => {
+        const data = await response.json();
+        if (response.ok && data.success) {
+            alertBox.className = 'alert alert-success py-2 px-3 small mb-0 mt-2';
+            alertBox.innerHTML = '<i class="bi bi-check-circle-fill me-1"></i> ' + (data.message || 'Test email sent successfully!');
+        } else {
+            alertBox.className = 'alert alert-danger py-2 px-3 small mb-0 mt-2';
+            alertBox.innerHTML = '<i class="bi bi-exclamation-triangle-fill me-1"></i> ' + (data.message || 'Failed to send test email.');
+        }
+    })
+    .catch(err => {
+        alertBox.className = 'alert alert-danger py-2 px-3 small mb-0 mt-2';
+        alertBox.innerHTML = '<i class="bi bi-exclamation-triangle-fill me-1"></i> Network or server error: ' + err.message;
+    })
+    .finally(() => {
+        sendBtn.disabled = false;
+        sendBtn.innerHTML = '<i class="bi bi-send me-1"></i> Send Test Email Now';
+    });
+}
+</script>
+@endpush

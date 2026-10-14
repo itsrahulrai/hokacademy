@@ -157,40 +157,40 @@
             </div>
 
             <ul class="md-disc">
-                <li><a class="c-navy" href="{{ route('programs.index') }}"><span class="md-disc-ico"><i
+                <li><a class="c-navy" href="{{ route('programs.show', 'aesthetic-cosmetic-medicine') }}"><span class="md-disc-ico"><i
                                 class="bi bi-stars"></i></span><span>Aesthetic &amp; Cosmetic Medicine</span><i
                             class="bi bi-arrow-right md-go"></i></a></li>
-                <li><a class="c-teal" href="{{ route('programs.index') }}"><span class="md-disc-ico"><i
+                <li><a class="c-teal" href="{{ route('programs.show', 'advanced-injectables') }}"><span class="md-disc-ico"><i
                                 class="bi bi-eyedropper"></i></span><span>Advanced Injectables</span><i
                             class="bi bi-arrow-right md-go"></i></a></li>
-                <li><a class="c-blue" href="{{ route('programs.index') }}"><span class="md-disc-ico"><i
+                <li><a class="c-blue" href="{{ route('programs.show', 'laser-energy-based-medicine') }}"><span class="md-disc-ico"><i
                                 class="bi bi-lightning-charge"></i></span><span>Laser &amp; Energy-Based
                             Medicine</span><i class="bi bi-arrow-right md-go"></i></a></li>
-                <li><a class="c-red" href="{{ route('programs.index') }}"><span class="md-disc-ico"><i
+                <li><a class="c-red" href="{{ route('programs.show', 'hair-restoration-transplantation') }}"><span class="md-disc-ico"><i
                                 class="bi bi-scissors"></i></span><span>Hair Restoration &amp; Hair
                             Transplantation</span><i class="bi bi-arrow-right md-go"></i></a></li>
-                <li><a class="c-navy" href="{{ route('programs.index') }}"><span class="md-disc-ico"><i
+                <li><a class="c-navy" href="{{ route('programs.show', 'medical-nutrition-weight-management') }}"><span class="md-disc-ico"><i
                                 class="bi bi-basket"></i></span><span>Medical Nutrition &amp; Weight
                             Management</span><i class="bi bi-arrow-right md-go"></i></a></li>
-                <li><a class="c-teal" href="{{ route('programs.index') }}"><span class="md-disc-ico"><i
+                <li><a class="c-teal" href="{{ route('programs.show', 'cosmetic-surgical-gynaecology') }}"><span class="md-disc-ico"><i
                                 class="bi bi-gender-female"></i></span><span>Cosmetic &amp; Surgical
                             Gynaecology</span><i class="bi bi-arrow-right md-go"></i></a></li>
-                <li><a class="c-blue" href="{{ route('programs.index') }}"><span class="md-disc-ico"><i
+                <li><a class="c-blue" href="{{ route('programs.show', 'urology-endourology') }}"><span class="md-disc-ico"><i
                                 class="bi bi-clipboard2-pulse"></i></span><span>Urology &amp;
                             Endourology</span><i class="bi bi-arrow-right md-go"></i></a></li>
-                <li><a class="c-red" href="{{ route('programs.index') }}"><span class="md-disc-ico"><i
+                <li><a class="c-red" href="{{ route('programs.show', 'general-surgery') }}"><span class="md-disc-ico"><i
                                 class="bi bi-bandaid"></i></span><span>General Surgery</span><i
                             class="bi bi-arrow-right md-go"></i></a></li>
-                <li><a class="c-navy" href="{{ route('programs.index') }}"><span class="md-disc-ico"><i
+                <li><a class="c-navy" href="{{ route('programs.show', 'oral-maxillofacial-surgery') }}"><span class="md-disc-ico"><i
                                 class="bi bi-emoji-smile"></i></span><span>Oral &amp; Maxillofacial
                             Surgery</span><i class="bi bi-arrow-right md-go"></i></a></li>
-                <li><a class="c-teal" href="{{ route('programs.index') }}"><span class="md-disc-ico"><i
+                <li><a class="c-teal" href="{{ route('programs.show', 'permanent-makeup') }}"><span class="md-disc-ico"><i
                                 class="bi bi-palette"></i></span><span>PMU &amp; Medical Camouflage</span><i
                             class="bi bi-arrow-right md-go"></i></a></li>
-                <li><a class="c-blue" href="{{ route('programs.index') }}"><span class="md-disc-ico"><i
+                <li><a class="c-blue" href="{{ route('programs.show', 'nursing-clinical-care') }}"><span class="md-disc-ico"><i
                                 class="bi bi-hospital"></i></span><span>Nursing, OT &amp; Paramedical
                             Education</span><i class="bi bi-arrow-right md-go"></i></a></li>
-                <li><a class="c-red" href="{{ route('programs.index') }}"><span class="md-disc-ico"><i
+                <li><a class="c-red" href="{{ route('programs.show', 'laser-fundamentals-technicians') }}"><span class="md-disc-ico"><i
                                 class="bi bi-cpu"></i></span><span>Aesthetic &amp; Laser Technology</span><i
                             class="bi bi-arrow-right md-go"></i></a></li>
             </ul>

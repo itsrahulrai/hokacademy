@@ -121,11 +121,15 @@
 
                     <!-- Certification Callout (if present) -->
                     @if(!empty($program->certification))
-                        <div class="sd-cert-box">
-                            <div class="sd-cert-ico"><i class="bi bi-award-fill"></i></div>
-                            <div>
-                                <h3>Certification &amp; Fellowship</h3>
-                                <p>{{ $program->certification }}</p>
+                        <div class="sd-cert-card">
+                            <div class="sd-cert-watermark"><i class="bi bi-patch-check"></i></div>
+                            <div class="sd-cert-emblem">
+                                <i class="bi bi-award-fill"></i>
+                            </div>
+                            <div class="sd-cert-content">
+                                <span class="sd-cert-kicker"><i class="bi bi-patch-check-fill me-1"></i> Official Academy Credential</span>
+                                <h3 class="sd-cert-title">Certification &amp; Fellowship</h3>
+                                <p class="sd-cert-name">{{ $program->certification }}</p>
                             </div>
                         </div>
                     @endif
@@ -140,13 +144,13 @@
                     </div>
                 </div>
 
-                <!-- Sidebar Snapshot -->
-                <aside class="sd-side {{ $catTone }}" aria-label="Program snapshot">
+                <!-- Sidebar Overview -->
+                <aside class="sd-side {{ $catTone }}" aria-label="Program overview">
                     <div class="sd-box">
 
                         <div class="sd-box-head">
                             <span class="wt-ico"><i class="bi {{ $catIcon }}"></i></span>
-                            <h3>Program Snapshot<small>{{ $program->title }}</small></h3>
+                            <h3>Program Overview<small>{{ $program->title }}</small></h3>
                         </div>
 
                         <div class="sd-box-body">
@@ -236,12 +240,7 @@
                 <p class="sec-text">Share your details and our team will get back to you with upcoming batch dates, eligibility criteria and detailed curriculum.</p>
             </div>
 
-            @if(session('success'))
-                <div class="enq-alert ok" role="status">
-                    <i class="bi bi-check-circle-fill"></i>
-                    <span>{{ session('success') }}</span>
-                </div>
-            @endif
+
 
             @if($errors->any())
                 <div class="enq-alert bad" role="alert">
@@ -389,14 +388,14 @@
                         $relIcon = $rel->icon ?? ($rel->category->icon ?? 'bi-award');
                     @endphp
                     <article class="sv-card {{ $relTone }}">
-                        <div class="sv-img">
+                        <a href="{{ route('programs.show', $rel->slug) }}" class="sv-img" aria-label="{{ $rel->title }}">
                             <img src="{{ $rel->image_url }}" width="640" height="400" loading="lazy" alt="{{ $rel->title }}" onerror="this.remove()">
                             <i class="bi {{ $relIcon }} sv-fallback"></i>
                             <span class="sv-tag">{{ $rel->category->short_name ?? ($rel->category->name ?? 'Program') }}</span>
-                        </div>
+                        </a>
                         <div class="sv-body">
                             <span class="sv-chip"><i class="bi {{ $relIcon }}"></i></span>
-                            <h4>{{ $rel->title }}</h4>
+                            <h4><a href="{{ route('programs.show', $rel->slug) }}" class="text-reset text-decoration-none">{{ $rel->title }}</a></h4>
                             <p>{{ $rel->short_description }}</p>
                             <div class="sv-foot">
                                 <a href="{{ route('programs.show', $rel->slug) }}" class="sv-btn" aria-label="Read more about {{ $rel->title }}">
@@ -418,25 +417,165 @@
 
 @push('styles')
 <style>
-/* Responsive enhancements for enquiry form across all devices */
-.enq-form-card {
-    border-radius: 1.15rem;
-    box-shadow: 0 10px 30px rgba(7, 29, 58, 0.06);
+/* Prestigious Certification & Fellowship Card */
+.sd-cert-card {
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    gap: 1.35rem;
+    margin-top: 2rem;
+    margin-bottom: 1.4rem;
+    padding: 1.4rem 1.65rem;
+    background: linear-gradient(135deg, #ffffff 0%, #f7f9fc 100%);
+    border: 1px solid rgba(199, 159, 87, 0.38);
+    border-left: 5px solid #d4af37;
+    border-radius: 1rem;
+    box-shadow: 0 10px 28px rgba(7, 29, 58, 0.06), 0 2px 6px rgba(0, 0, 0, 0.03);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
-.enq-info {
-    border-radius: 1.15rem;
-    box-shadow: 0 10px 30px rgba(7, 29, 58, 0.12);
+.sd-cert-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 14px 34px rgba(7, 29, 58, 0.09), 0 3px 8px rgba(0, 0, 0, 0.04);
 }
 
-.enq-fields .enq-field input,
-.enq-fields .enq-field select,
-.enq-fields .enq-field textarea {
+.sd-cert-watermark {
+    position: absolute;
+    right: -15px;
+    bottom: -25px;
+    font-size: 7.2rem;
+    color: #d4af37;
+    opacity: 0.07;
+    line-height: 1;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.sd-cert-emblem {
+    position: relative;
+    z-index: 1;
+    width: 3.8rem;
+    height: 3.8rem;
+    border-radius: 1rem;
+    background: linear-gradient(135deg, #071d3a 0%, #0d2e5c 100%);
+    color: #f1c40f;
+    display: grid;
+    place-items: center;
+    font-size: 1.85rem;
+    flex-shrink: 0;
+    box-shadow: 0 8px 18px rgba(7, 29, 58, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+}
+
+.sd-cert-content {
+    position: relative;
+    z-index: 1;
+    flex: 1;
+    min-width: 0;
+}
+
+.sd-cert-kicker {
+    display: inline-flex;
+    align-items: center;
+    font-family: var(--font-head);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #9a7318;
+    background: rgba(212, 175, 55, 0.12);
+    border: 1px solid rgba(212, 175, 55, 0.28);
+    border-radius: 999px;
+    padding: 0.2rem 0.65rem;
+    margin-bottom: 0.35rem;
+}
+
+.sd-cert-title {
+    font-family: var(--font-head);
+    font-weight: 700;
+    font-size: 1.15rem;
+    color: #071d3a;
+    margin: 0 0 0.3rem;
+    line-height: 1.25;
+}
+
+.sd-cert-name {
+    font-family: var(--font-body);
+    font-size: 1.02rem;
+    font-weight: 600;
+    color: #1e3a5f;
+    margin: 0;
+    line-height: 1.45;
+}
+
+/* Fallback / Alias for sd-cert-box if referenced */
+.sd-cert-box {
+    display: flex;
+    gap: 1.2rem;
+    align-items: center;
+    margin-top: 1.8rem;
+    margin-bottom: 1.4rem;
+    padding: 1.25rem 1.4rem;
+    border-radius: 0.85rem;
+    background: #fbfcfe;
+    border: 1px solid rgba(7, 29, 58, 0.1);
+    border-left: 4px solid var(--c, #0d2e5c);
+}
+
+.sd-cert-ico {
+    display: grid;
+    place-items: center;
+    width: 3rem;
+    height: 3rem;
     border-radius: 0.75rem;
-    font-size: 0.95rem;
+    background: #fff;
+    color: var(--c, #0d2e5c);
+    font-size: 1.5rem;
+    flex-shrink: 0;
+    box-shadow: 0 4px 12px rgba(7, 29, 58, 0.08);
+}
+
+/* Safety box layout adjustment */
+.sd-safety {
+    margin-top: 1.4rem !important;
+}
+
+/* Remove internal scrollbar from sidebar */
+.sd-side {
+    max-height: none !important;
+    overflow-y: visible !important;
+    overflow: visible !important;
+    scrollbar-width: none !important;
+}
+
+.sd-side::-webkit-scrollbar {
+    display: none !important;
+    width: 0 !important;
+    height: 0 !important;
 }
 
 @media (max-width: 575.98px) {
+    .sd-cert-card {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.85rem;
+        padding: 1.2rem 1.2rem;
+    }
+    
+    .sd-cert-emblem {
+        width: 3.2rem;
+        height: 3.2rem;
+        font-size: 1.5rem;
+    }
+    
+    .sd-cert-title {
+        font-size: 1.05rem;
+    }
+    
+    .sd-cert-name {
+        font-size: 0.95rem;
+    }
+
     .enq-fields {
         grid-template-columns: 1fr !important;
         gap: 0.85rem;

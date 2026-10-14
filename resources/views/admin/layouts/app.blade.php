@@ -712,7 +712,7 @@
                     try {
                         var editor = JoditObj.make(el, {
                             height: el.dataset.height ? parseInt(el.dataset.height) : 480,
-                            minHeight: 380,
+                            minHeight: el.dataset.minHeight ? parseInt(el.dataset.minHeight) : 280,
                             theme: 'default',
                             toolbarAdaptive: false,
                             toolbarSticky: true,
@@ -738,6 +738,13 @@
                                 insertImageAsBase64URI: true
                             }
                         });
+
+                        // Store editor reference for programmatic access
+                        el.__jodit = editor;
+                        window.joditInstances = window.joditInstances || {};
+                        if (el.id) {
+                            window.joditInstances[el.id] = editor;
+                        }
 
                         // Keep underlying textarea synchronized on form submit
                         if (el.form) {

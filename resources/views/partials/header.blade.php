@@ -95,57 +95,57 @@
                                     <a class="dropdown-item mega-all d-lg-none" href="{{ route('programs.index') }}">All
                                         programs</a>
                                     <h6 class="mt-2 mt-lg-0">Doctors &amp; Medical Professionals</h6>
-                                    <a class="dropdown-item" href="{{ route('programs.index') }}">Aesthetic &amp;
+                                    <a class="dropdown-item" href="{{ route('programs.show', 'aesthetic-cosmetic-medicine') }}">Aesthetic &amp;
                                         Cosmetic Medicine</a>
-                                    <a class="dropdown-item" href="{{ route('programs.index') }}">Advanced
+                                    <a class="dropdown-item" href="{{ route('programs.show', 'advanced-injectables') }}">Advanced
                                         Injectables</a>
-                                    <a class="dropdown-item" href="{{ route('programs.index') }}">Laser &amp; Energy-Based
+                                    <a class="dropdown-item" href="{{ route('programs.show', 'laser-energy-based-medicine') }}">Laser &amp; Energy-Based
                                         Medicine</a>
-                                    <a class="dropdown-item" href="{{ route('programs.index') }}">Hair Restoration &amp; Hair
+                                    <a class="dropdown-item" href="{{ route('programs.show', 'hair-restoration-transplantation') }}">Hair Restoration &amp; Hair
                                         Transplantation</a>
-                                    <a class="dropdown-item" href="{{ route('programs.index') }}">Medical Nutrition
+                                    <a class="dropdown-item" href="{{ route('programs.show', 'medical-nutrition-weight-management') }}">Medical Nutrition
                                         &amp; Weight Management</a>
-                                    <a class="dropdown-item" href="{{ route('programs.index') }}">Cosmetic &amp; Surgical
+                                    <a class="dropdown-item" href="{{ route('programs.show', 'cosmetic-surgical-gynaecology') }}">Cosmetic &amp; Surgical
                                         Gynaecology</a>
-                                    <a class="dropdown-item" href="{{ route('programs.index') }}">Urology &amp;
+                                    <a class="dropdown-item" href="{{ route('programs.show', 'urology-endourology') }}">Urology &amp;
                                         Endourology</a>
-                                    <a class="dropdown-item" href="{{ route('programs.index') }}">General Surgery</a>
-                                    <a class="dropdown-item" href="{{ route('programs.index') }}">Oral &amp; Maxillofacial
+                                    <a class="dropdown-item" href="{{ route('programs.show', 'general-surgery') }}">General Surgery</a>
+                                    <a class="dropdown-item" href="{{ route('programs.show', 'oral-maxillofacial-surgery') }}">Oral &amp; Maxillofacial
                                         Surgery</a>
                                 </div>
                                 <div class="col-lg-3 c-teal">
                                     <h6>PMU &amp; Aesthetic Professionals</h6>
-                                    <a class="dropdown-item" href="{{ route('programs.index') }}">Permanent Makeup</a>
-                                    <a class="dropdown-item" href="{{ route('programs.index') }}">Medical PMU</a>
-                                    <a class="dropdown-item" href="{{ route('programs.index') }}">Medical
+                                    <a class="dropdown-item" href="{{ route('programs.show', 'permanent-makeup') }}">Permanent Makeup</a>
+                                    <a class="dropdown-item" href="{{ route('programs.show', 'medical-pmu') }}">Medical PMU</a>
+                                    <a class="dropdown-item" href="{{ route('programs.show', 'medical-camouflage') }}">Medical
                                         Camouflage</a>
-                                    <a class="dropdown-item" href="{{ route('programs.index') }}">Scar Camouflage</a>
-                                    <a class="dropdown-item" href="{{ route('programs.index') }}">Areola/Nipple
+                                    <a class="dropdown-item" href="{{ route('programs.show', 'scar-camouflage') }}">Scar Camouflage</a>
+                                    <a class="dropdown-item" href="{{ route('programs.show', 'areola-nipple-camouflage') }}">Areola/Nipple
                                         Camouflage</a>
-                                    <a class="dropdown-item" href="{{ route('programs.index') }}">Pigment Science &amp;
+                                    <a class="dropdown-item" href="{{ route('programs.show', 'pigment-science-colour-theory') }}">Pigment Science &amp;
                                         Colour Theory</a>
                                 </div>
                                 <div class="col-lg-3 c-blue">
                                     <h6>Nursing, OT &amp; Paramedical</h6>
-                                    <a class="dropdown-item" href="{{ route('programs.index') }}">Nursing &amp; Clinical
+                                    <a class="dropdown-item" href="{{ route('programs.show', 'nursing-clinical-care') }}">Nursing &amp; Clinical
                                         Care</a>
-                                    <a class="dropdown-item" href="{{ route('programs.index') }}">OT Protocols</a>
-                                    <a class="dropdown-item" href="{{ route('programs.index') }}">Surgical Assistance</a>
-                                    <a class="dropdown-item" href="{{ route('programs.index') }}">Instrumentation</a>
-                                    <a class="dropdown-item" href="{{ route('programs.index') }}">Sterilisation
+                                    <a class="dropdown-item" href="{{ route('programs.show', 'ot-protocols-management') }}">OT Protocols</a>
+                                    <a class="dropdown-item" href="{{ route('programs.show', 'surgical-assistance') }}">Surgical Assistance</a>
+                                    <a class="dropdown-item" href="{{ route('programs.show', 'surgical-instrumentation') }}">Instrumentation</a>
+                                    <a class="dropdown-item" href="{{ route('programs.show', 'sterilisation-infection-control') }}">Sterilisation
                                         &amp; Infection Control</a>
-                                    <a class="dropdown-item" href="{{ route('programs.index') }}">Perioperative Care</a>
+                                    <a class="dropdown-item" href="{{ route('programs.show', 'perioperative-care') }}">Perioperative Care</a>
                                 </div>
                                 <div class="col-lg-3 c-red">
                                     <h6>Aesthetic &amp; Laser Technicians</h6>
-                                    <a class="dropdown-item" href="{{ route('programs.index') }}">Laser
+                                    <a class="dropdown-item" href="{{ route('programs.show', 'laser-fundamentals-technicians') }}">Laser
                                         Fundamentals</a>
-                                    <a class="dropdown-item" href="{{ route('programs.index') }}">Device Handling</a>
-                                    <a class="dropdown-item" href="{{ route('programs.index') }}">Energy-Based
+                                    <a class="dropdown-item" href="{{ route('programs.show', 'device-handling-calibration') }}">Device Handling</a>
+                                    <a class="dropdown-item" href="{{ route('programs.show', 'energy-based-technologies') }}">Energy-Based
                                         Technologies</a>
-                                    <a class="dropdown-item" href="{{ route('programs.index') }}">Treatment-Room
+                                    <a class="dropdown-item" href="{{ route('programs.show', 'treatment-room-protocols') }}">Treatment-Room
                                         Protocols</a>
-                                    <a class="dropdown-item" href="{{ route('programs.index') }}">Equipment Safety</a>
+                                    <a class="dropdown-item" href="{{ route('programs.show', 'equipment-safety-emergency-protocols') }}">Equipment Safety</a>
                                 </div>
                             </div>
                             <div class="mega-foot">

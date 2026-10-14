@@ -471,56 +471,56 @@
                 <div class="tab-pane fade show active" id="wt-doc" role="tabpanel" aria-labelledby="wt-tab-doc"
                     tabindex="0">
                     <div class="disc-list">
-                        <a class="disc c-navy" href="{{ route('programs.index') }}">
+                        <a class="disc c-navy" href="{{ route('programs.show', 'aesthetic-cosmetic-medicine') }}">
                             <span class="wt-ico"><i class="bi bi-stars"></i></span>
                             <span class="disc-txt"><strong>Aesthetic &amp; Cosmetic Medicine</strong><span>Facial
                                     aesthetics, advanced injectables, skin rejuvenation and aesthetic treatment
                                     planning.</span></span>
                             <i class="bi bi-arrow-right disc-go"></i>
                         </a>
-                        <a class="disc c-teal" href="{{ route('programs.index') }}">
+                        <a class="disc c-teal" href="{{ route('programs.show', 'laser-energy-based-medicine') }}">
                             <span class="wt-ico"><i class="bi bi-lightning-charge"></i></span>
                             <span class="disc-txt"><strong>Laser &amp; Energy-Based Medicine</strong><span>Laser
                                     technologies, energy-based devices, treatment principles, parameters, safety
                                     and clinical applications.</span></span>
                             <i class="bi bi-arrow-right disc-go"></i>
                         </a>
-                        <a class="disc c-blue" href="{{ route('programs.index') }}">
+                        <a class="disc c-blue" href="{{ route('programs.show', 'hair-restoration-transplantation') }}">
                             <span class="wt-ico"><i class="bi bi-scissors"></i></span>
                             <span class="disc-txt"><strong>Hair Restoration &amp; Hair
                                     Transplantation</strong><span>Hair-loss assessment, transplantation
                                     principles, graft management and restoration techniques.</span></span>
                             <i class="bi bi-arrow-right disc-go"></i>
                         </a>
-                        <a class="disc c-red" href="{{ route('programs.index') }}">
+                        <a class="disc c-red" href="{{ route('programs.show', 'medical-nutrition-weight-management') }}">
                             <span class="wt-ico"><i class="bi bi-basket"></i></span>
                             <span class="disc-txt"><strong>Medical Nutrition &amp; Weight
                                     Management</strong><span>Clinical nutrition, metabolic health, body
                                     composition and structured approaches to weight management.</span></span>
                             <i class="bi bi-arrow-right disc-go"></i>
                         </a>
-                        <a class="disc c-navy" href="{{ route('programs.index') }}">
+                        <a class="disc c-navy" href="{{ route('programs.show', 'cosmetic-surgical-gynaecology') }}">
                             <span class="wt-ico"><i class="bi bi-gender-female"></i></span>
                             <span class="disc-txt"><strong>Cosmetic &amp; Surgical Gynaecology</strong><span>Cosmetic
                                     gynaecology, female intimate wellness, energy-based technologies and
                                     appropriate surgical procedures.</span></span>
                             <i class="bi bi-arrow-right disc-go"></i>
                         </a>
-                        <a class="disc c-teal" href="{{ route('programs.index') }}">
+                        <a class="disc c-teal" href="{{ route('programs.show', 'urology-endourology') }}">
                             <span class="wt-ico"><i class="bi bi-clipboard2-pulse"></i></span>
                             <span class="disc-txt"><strong>Urology &amp; Endourology</strong><span>Endoscopic
                                     urology, stone surgery, RIRS, PCNL, URS, laser procedures and other advanced
                                     urological techniques.</span></span>
                             <i class="bi bi-arrow-right disc-go"></i>
                         </a>
-                        <a class="disc c-blue" href="{{ route('programs.index') }}">
+                        <a class="disc c-blue" href="{{ route('programs.show', 'general-surgery') }}">
                             <span class="wt-ico"><i class="bi bi-bandaid"></i></span>
                             <span class="disc-txt"><strong>General Surgery</strong><span>Surgical skills,
                                     operative principles, minimally invasive techniques and perioperative
                                     practice.</span></span>
                             <i class="bi bi-arrow-right disc-go"></i>
                         </a>
-                        <a class="disc c-red" href="{{ route('programs.index') }}">
+                        <a class="disc c-red" href="{{ route('programs.show', 'oral-maxillofacial-surgery') }}">
                             <span class="wt-ico"><i class="bi bi-emoji-smile"></i></span>
                             <span class="disc-txt"><strong>Oral &amp; Maxillofacial
                                     Surgery</strong><span>Specialist-led education in appropriate oral and
@@ -537,15 +537,15 @@
                         <div class="wt-feature-body">
                             <h3>PMU &amp; Medical Camouflage</h3>
                             <ul class="chips">
-                                <li>Permanent Makeup</li>
-                                <li>Medical PMU</li>
-                                <li>Medical Camouflage</li>
-                                <li>Scar Camouflage</li>
-                                <li>Areola/Nipple Camouflage</li>
-                                <li>Pigment Science</li>
-                                <li>Colour Theory</li>
+                                <li><a href="{{ route('programs.show', 'permanent-makeup') }}" class="text-reset text-decoration-none">Permanent Makeup</a></li>
+                                <li><a href="{{ route('programs.show', 'medical-pmu') }}" class="text-reset text-decoration-none">Medical PMU</a></li>
+                                <li><a href="{{ route('programs.show', 'medical-camouflage') }}" class="text-reset text-decoration-none">Medical Camouflage</a></li>
+                                <li><a href="{{ route('programs.show', 'scar-camouflage') }}" class="text-reset text-decoration-none">Scar Camouflage</a></li>
+                                <li><a href="{{ route('programs.show', 'areola-nipple-camouflage') }}" class="text-reset text-decoration-none">Areola/Nipple Camouflage</a></li>
+                                <li><a href="{{ route('programs.show', 'pigment-science-colour-theory') }}" class="text-reset text-decoration-none">Pigment Science</a></li>
+                                <li><a href="{{ route('programs.show', 'pigment-science-colour-theory') }}" class="text-reset text-decoration-none">Colour Theory</a></li>
                             </ul>
-                            <a href="{{ route('programs.index') }}" class="wt-more">Explore PMU programs <i
+                            <a href="{{ route('programs.index', ['category' => 'pmu']) }}" class="wt-more">Explore PMU programs <i
                                     class="bi bi-arrow-right"></i></a>
                         </div>
                     </article>
@@ -558,16 +558,16 @@
                         <div class="wt-feature-body">
                             <h3>Clinical &amp; Perioperative Education</h3>
                             <ul class="chips">
-                                <li>OT Protocols</li>
-                                <li>Surgical Assistance</li>
-                                <li>Instrumentation</li>
-                                <li>Sterilisation</li>
-                                <li>Infection Control</li>
-                                <li>Patient Preparation</li>
-                                <li>Endoscopy Assistance</li>
-                                <li>Perioperative Care</li>
+                                <li><a href="{{ route('programs.show', 'ot-protocols-management') }}" class="text-reset text-decoration-none">OT Protocols</a></li>
+                                <li><a href="{{ route('programs.show', 'surgical-assistance') }}" class="text-reset text-decoration-none">Surgical Assistance</a></li>
+                                <li><a href="{{ route('programs.show', 'surgical-instrumentation') }}" class="text-reset text-decoration-none">Instrumentation</a></li>
+                                <li><a href="{{ route('programs.show', 'sterilisation-infection-control') }}" class="text-reset text-decoration-none">Sterilisation</a></li>
+                                <li><a href="{{ route('programs.show', 'sterilisation-infection-control') }}" class="text-reset text-decoration-none">Infection Control</a></li>
+                                <li><a href="{{ route('programs.show', 'nursing-clinical-care') }}" class="text-reset text-decoration-none">Patient Preparation</a></li>
+                                <li><a href="{{ route('programs.show', 'surgical-assistance') }}" class="text-reset text-decoration-none">Endoscopy Assistance</a></li>
+                                <li><a href="{{ route('programs.show', 'perioperative-care') }}" class="text-reset text-decoration-none">Perioperative Care</a></li>
                             </ul>
-                            <a href="{{ route('programs.index') }}" class="wt-more">Explore nursing &amp; OT programs <i
+                            <a href="{{ route('programs.index', ['category' => 'nursing']) }}" class="wt-more">Explore nursing &amp; OT programs <i
                                     class="bi bi-arrow-right"></i></a>
                         </div>
                     </article>
@@ -580,14 +580,14 @@
                         <div class="wt-feature-body">
                             <h3>Aesthetic &amp; Laser Technology</h3>
                             <ul class="chips">
-                                <li>Laser Fundamentals</li>
-                                <li>Device Handling</li>
-                                <li>Energy-Based Technologies</li>
-                                <li>Treatment-Room Protocols</li>
-                                <li>Equipment Safety</li>
-                                <li>Clinical Assistance</li>
+                                <li><a href="{{ route('programs.show', 'laser-fundamentals-technicians') }}" class="text-reset text-decoration-none">Laser Fundamentals</a></li>
+                                <li><a href="{{ route('programs.show', 'device-handling-calibration') }}" class="text-reset text-decoration-none">Device Handling</a></li>
+                                <li><a href="{{ route('programs.show', 'energy-based-technologies') }}" class="text-reset text-decoration-none">Energy-Based Technologies</a></li>
+                                <li><a href="{{ route('programs.show', 'treatment-room-protocols') }}" class="text-reset text-decoration-none">Treatment-Room Protocols</a></li>
+                                <li><a href="{{ route('programs.show', 'equipment-safety-emergency-protocols') }}" class="text-reset text-decoration-none">Equipment Safety</a></li>
+                                <li><a href="{{ route('programs.show', 'laser-fundamentals-technicians') }}" class="text-reset text-decoration-none">Clinical Assistance</a></li>
                             </ul>
-                            <a href="{{ route('programs.index') }}" class="wt-more">Explore laser technician
+                            <a href="{{ route('programs.index', ['category' => 'technicians']) }}" class="wt-more">Explore laser technician
                                 programs <i class="bi bi-arrow-right"></i></a>
                         </div>
                     </article>

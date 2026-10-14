@@ -42,7 +42,7 @@
     <!-- ============ HEADER END ============ -->
 
     <!-- ============ FLASH NOTIFICATIONS ============ -->
-    @if(session('success'))
+    @if(session('success') && !request()->routeIs('thank.you'))
         <div class="container mt-3">
             <div class="alert alert-success alert-dismissible fade show" role="alert" style="border-radius: 12px; font-weight: 500;">
                 <i class="bi bi-check-circle-fill me-2"></i> {{ session('success') }}
