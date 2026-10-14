@@ -952,58 +952,87 @@
 
             <!-- Posts: 1 featured + 2 side posts -->
             <div class="bl-grid">
+                @if(isset($recentBlogs) && $recentBlogs->count() > 0)
+                    @php
+                        $featuredBlog = $recentBlogs->first();
+                        $sideBlogs = $recentBlogs->slice(1, 2);
 
-                <!-- Featured post -->
-                <article class="bl-card bl-featured c-blue">
-                    <div class="bl-media">
-                        <img src="{{ asset('assets/img/blog/post-1.jpg') }}" class="bl-img" width="900" height="560"
-                            alt="Doctors in a specialist-led aesthetic medicine training session" loading="lazy"
-                            onerror="this.remove()">
-                        <i class="bi bi-stars bl-fallback"></i>
-                    </div>
-                    <div class="bl-body">
-                        <span class="bl-tag">Aesthetic Medicine</span>
-                        <h3><a href="{{ route('blog.index') }}">Choosing an Advanced Training Pathway in Aesthetic Medicine</a>
-                        </h3>
-                        <p>What to look for in a program: scientific foundations, specialist demonstrations,
-                            case-based learning and a clear focus on patient selection and safety.</p>
-                        <a href="{{ route('blog.index') }}" class="bl-more">Read article <i class="bi bi-arrow-right"></i></a>
-                    </div>
-                </article>
+                        $fallbackIcons = [
+                            'Aesthetic Medicine' => 'bi-stars',
+                            'Patient Safety' => 'bi-shield-check',
+                            'International' => 'bi-globe-asia-australia',
+                            'Laser & Energy' => 'bi-lightning-charge',
+                            'Nursing & OT' => 'bi-hospital',
+                            'Clinical Education' => 'bi-journal-medical',
+                            'Surgery' => 'bi-bandaid',
+                            'PMU' => 'bi-palette',
+                        ];
+                        
+                        $cardTones = ['c-blue', 'c-teal', 'c-navy'];
+                        $featIcon = $fallbackIcons[$featuredBlog->category_tag] ?? 'bi-stars';
+                        $featImg = $featuredBlog->featured_image ? asset($featuredBlog->featured_image) : null;
+                    @endphp
 
-                <!-- Side post 1 -->
-                <article class="bl-card bl-side c-teal">
-                    <div class="bl-media">
-                        <img src="{{ asset('assets/img/blog/post-2.jpg') }}" class="bl-img" width="600" height="400"
-                            alt="Clinical team preparing a treatment room" loading="lazy"
-                            onerror="this.remove()">
-                        <i class="bi bi-shield-check bl-fallback"></i>
-                    </div>
-                    <div class="bl-body">
-                        <span class="bl-tag">Patient Safety</span>
-                        <h3><a href="{{ route('blog.index') }}">Why Responsible Clinical Education Begins with Safety</a></h3>
-                        <p>Patient assessment, informed consent, infection prevention and complication
-                            awareness.</p>
-                        <a href="{{ route('blog.index') }}" class="bl-more">Read article <i class="bi bi-arrow-right"></i></a>
-                    </div>
-                </article>
+                    <!-- Featured post (Large Left Card) -->
+                    <article class="bl-card bl-featured {{ $cardTones[0] }}">
+                        <div class="bl-media">
+                            @if($featImg)
+                                <img src="{{ $featImg }}" class="bl-img" width="900" height="560"
+                                    alt="{{ $featuredBlog->title }}" loading="lazy"
+                                    onerror="this.remove()">
+                            @endif
+                            <i class="bi {{ $featIcon }} bl-fallback"></i>
+                        </div>
+                        <div class="bl-body">
+                            <span class="bl-tag">{{ $featuredBlog->category_tag ?: 'Aesthetic Medicine' }}</span>
+                            <h3>
+                                <a href="{{ route('blog.show', $featuredBlog->slug) }}">
+                                    {{ $featuredBlog->title }}
+                                </a>
+                            </h3>
+                            <p>{{ Str::limit($featuredBlog->excerpt, 150) }}</p>
+                            <a href="{{ route('blog.show', $featuredBlog->slug) }}" class="bl-more">
+                                Read article <i class="bi bi-arrow-right"></i>
+                            </a>
+                        </div>
+                    </article>
 
-                <!-- Side post 2 -->
-                <article class="bl-card bl-side c-navy">
-                    <div class="bl-media">
-                        <img src="{{ asset('assets/img/blog/post-3.jpg') }}" class="bl-img" width="600" height="400"
-                            alt="International doctors learning alongside Indian specialists" loading="lazy"
-                            onerror="this.remove()">
-                        <i class="bi bi-globe-asia-australia bl-fallback"></i>
+                    <!-- Side posts (Top & Bottom Right Cards) -->
+                    @foreach($sideBlogs as $idx => $sideBlog)
+                        @php
+                            $tone = $cardTones[$idx + 1] ?? 'c-teal';
+                            $sideIcon = $fallbackIcons[$sideBlog->category_tag] ?? ($idx === 0 ? 'bi-shield-check' : 'bi-globe-asia-australia');
+                            $sideImg = $sideBlog->featured_image ? asset($sideBlog->featured_image) : null;
+                        @endphp
+                        <article class="bl-card bl-side {{ $tone }}">
+                            <div class="bl-media">
+                                @if($sideImg)
+                                    <img src="{{ $sideImg }}" class="bl-img" width="600" height="400"
+                                        alt="{{ $sideBlog->title }}" loading="lazy"
+                                        onerror="this.remove()">
+                                @endif
+                                <i class="bi {{ $sideIcon }} bl-fallback"></i>
+                            </div>
+                            <div class="bl-body">
+                                <span class="bl-tag">{{ $sideBlog->category_tag ?: 'Clinical Insights' }}</span>
+                                <h3>
+                                    <a href="{{ route('blog.show', $sideBlog->slug) }}">
+                                        {{ $sideBlog->title }}
+                                    </a>
+                                </h3>
+                                <p>{{ Str::limit($sideBlog->excerpt, 110) }}</p>
+                                <a href="{{ route('blog.show', $sideBlog->slug) }}" class="bl-more">
+                                    Read article <i class="bi bi-arrow-right"></i>
+                                </a>
+                            </div>
+                        </article>
+                    @endforeach
+                @else
+                    <!-- Fallback if no blogs published yet -->
+                    <div class="col-12 text-center py-5">
+                        <p class="text-muted mb-0">New clinical insights and articles coming soon.</p>
                     </div>
-                    <div class="bl-body">
-                        <span class="bl-tag">International</span>
-                        <h3><a href="{{ route('blog.index') }}">Learning in India: What International Doctors Can Expect</a></h3>
-                        <p>Specialist-led lectures, clinical demonstrations, workshops and observational
-                            learning.</p>
-                        <a href="{{ route('blog.index') }}" class="bl-more">Read article <i class="bi bi-arrow-right"></i></a>
-                    </div>
-                </article>
+                @endif
             </div>
 
             <!-- Mobile-only button (desktop one sits in the header row) -->

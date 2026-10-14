@@ -48,5 +48,16 @@ class PageController extends Controller
         $page = Page::where('slug', 'international')->first();
         return view('frontend.international', compact('page'));
     }
+
+    public function show(string $slug)
+    {
+        $page = Page::where('slug', $slug)->where('is_active', true)->firstOrFail();
+
+        if (view()->exists("frontend.{$slug}")) {
+            return view("frontend.{$slug}", compact('page'));
+        }
+
+        return view('frontend.custom-page', compact('page'));
+    }
 }
 

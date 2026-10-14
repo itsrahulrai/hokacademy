@@ -1,52 +1,64 @@
 @extends('admin.layouts.app')
 
-@section('title', 'Pages & SEO Management')
+@section('title', 'Pages')
 
 @section('content')
-<div class="d-flex justify-content-between align-items-center mb-4">
+<div class="d-flex flex-wrap justify-content-between align-items-center gap-3 mb-4">
     <div>
-        <h2 class="h4 fw-bold mb-1">Pages &amp; SEO Meta Management</h2>
-        <p class="text-muted small mb-0">Control the title, meta tags, description, keywords, canonical URLs, and header titles for every page.</p>
+        <h2 class="h4 fw-bold mb-1" style="color: var(--hok-navy, #071D3A);">Pages &amp; SEO Management</h2>
+        <p class="text-muted small mb-0">Publish dynamic pages, configure hero headers, page content, and SEO meta tags.</p>
     </div>
+    <a href="{{ route('admin.pages.create') }}" class="btn btn-hok-admin shadow-sm">
+        <i class="bi bi-plus-circle-fill"></i>
+        <span>Add New Page</span>
+    </a>
 </div>
 
-<div class="card card-custom">
+<div class="card card-custom overflow-hidden">
     <div class="table-responsive">
         <table class="table table-hover align-middle mb-0">
             <thead class="table-light">
                 <tr>
                     <th>Page Name</th>
-                    <th>Slug / Route</th>
+                    <th>Route / URL</th>
+                    <th>Type</th>
                     <th>Meta Title</th>
-                    <th>Header Title</th>
                     <th>Status</th>
-                    <th>Actions</th>
+                    <th class="text-end" style="min-width: 140px;">Actions</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach($pages as $p)
+                @forelse($pages as $p)
+                    @php
+                        $isCore = in_array($p->slug, $systemSlugs ?? []);
+                    @endphp
                     <tr>
                         <td>
-                            <strong class="text-navy">{{ $p->title }}</strong>
+                            <strong class="text-dark d-block">{{ $p->title }}</strong>
+                            @if($p->header_title)
+                                <small class="text-muted text-truncate d-inline-block" style="max-width: 250px;">{{ $p->header_title }}</small>
+                            @endif
                         </td>
                         <td>
                             <code>/{{ $p->slug === 'home' ? '' : $p->slug }}</code>
                         </td>
                         <td>
-                            <span class="small text-truncate d-inline-block" style="max-width: 250px;">
+                            @if($isCore)
+                                <span class="badge bg-light text-secondary border rounded-pill px-2 py-1" style="font-size: 0.72rem; font-weight: 600;">System</span>
+                            @else
+                                <span class="badge bg-primary-subtle text-primary border border-primary-subtle rounded-pill px-2 py-1" style="font-size: 0.72rem; font-weight: 600;">Custom</span>
+                            @endif
+                        </td>
+                        <td>
+                            <span class="small text-muted text-truncate d-inline-block" style="max-width: 260px;">
                                 {{ $p->meta_title ?? 'Default' }}
                             </span>
                         </td>
                         <td>
-                            <span class="small text-muted text-truncate d-inline-block" style="max-width: 220px;">
-                                {{ $p->header_title ?? '-' }}
-                            </span>
-                        </td>
-                        <td>
                             @if($p->is_active)
-                                <span class="badge bg-success">Active</span>
+                                <span class="badge rounded-pill px-2 py-1" style="background: var(--hok-emerald, #10b981); color: #fff;">Active</span>
                             @else
-                                <span class="badge bg-secondary">Hidden</span>
+                                <span class="badge bg-secondary rounded-pill px-2 py-1">Hidden</span>
                             @endif
                         </td>
                         <td class="text-end text-nowrap">
@@ -54,17 +66,28 @@
                                 <a href="{{ url($p->slug === 'home' ? '/' : $p->slug) }}" target="_blank" class="btn-action-btn btn-action-view" title="View Page Live">
                                     <i class="bi bi-eye"></i>
                                 </a>
-                                <a href="{{ route('admin.pages.edit', $p->id) }}" class="btn btn-sm btn-hok-navy text-white text-decoration-none px-3 rounded-3 fw-semibold d-inline-flex align-items-center gap-1" style="font-size: 0.82rem;">
-                                    <i class="bi bi-pencil-square"></i>
-                                    <span>Edit SEO</span>
+                                <a href="{{ route('admin.pages.edit', $p->id) }}" class="btn-action-btn btn-action-edit" title="Edit Page">
+                                    <i class="bi bi-pencil"></i>
                                 </a>
+                                @if(!$isCore)
+                                    <form action="{{ route('admin.pages.destroy', $p->id) }}" method="POST" class="d-inline m-0 p-0" onsubmit="return confirm('Are you sure you want to delete &quot;{{ $p->title }}&quot;?');">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn-action-btn btn-action-delete" title="Delete Page">
+                                            <i class="bi bi-trash"></i>
+                                        </button>
+                                    </form>
+                                @endif
                             </div>
                         </td>
                     </tr>
-                @endforeach
+                @empty
+                    <tr>
+                        <td colspan="6" class="text-center py-4 text-muted">No pages found. Click "Add New Page" to create one.</td>
+                    </tr>
+                @endforelse
             </tbody>
         </table>
     </div>
 </div>
 @endsection
-

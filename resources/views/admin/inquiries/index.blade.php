@@ -32,53 +32,81 @@
             <button type="submit" class="btn btn-hok-navy flex-grow-1">
                 <i class="bi bi-funnel"></i> Filter
             </button>
-            <a href="{{ route('admin.inquiries.index') }}" class="btn btn-outline-secondary">
+            <a href="{{ route('admin.inquiries.index') }}" class="btn btn-outline-secondary" title="Reset Filters">
                 <i class="bi bi-arrow-counterclockwise"></i> Reset
             </a>
         </div>
     </form>
 </div>
 
-<div class="card card-custom overflow-hidden">
+<style>
+    .inquiries-card .table-responsive {
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+    }
+    .inquiries-card .table-responsive::-webkit-scrollbar {
+        display: none;
+        height: 0;
+        width: 0;
+    }
+    @media (min-width: 992px) {
+        .inquiries-card .table-responsive {
+            overflow-x: clip;
+        }
+    }
+    .btn-action-reply {
+        color: #ffffff;
+        background: #0d6efd;
+        border-color: #0d6efd;
+    }
+    .btn-action-reply:hover {
+        color: #ffffff;
+        background: #0b5ed7;
+        border-color: #0a58ca;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(13, 110, 253, 0.3);
+    }
+</style>
+
+<div class="card card-custom inquiries-card overflow-hidden">
     <div class="table-responsive">
-        <table class="table table-hover align-middle mb-0">
+        <table class="table table-hover align-middle mb-0" style="table-layout: auto; width: 100%;">
             <thead>
                 <tr>
                     <th>Received</th>
                     <th>Sender Name</th>
-                    <th>Phone / WhatsApp</th>
                     <th>Email</th>
                     <th>Country / Role</th>
                     <th>Program</th>
                     <th>Status</th>
-                    <th class="text-end" style="min-width: 140px;">Action</th>
+                    <th class="text-end">Action</th>
                 </tr>
             </thead>
             <tbody>
                 @forelse($inquiries as $inq)
                     <tr class="{{ $inq->status === 'new' ? 'table-warning-subtle fw-semibold' : '' }}">
                         <td>
-                            <small class="text-muted">{{ $inq->created_at->format('M d, Y H:i') }}</small>
+                            <div class="fw-bold text-navy text-nowrap">{{ $inq->created_at->format('M d, Y') }}</div>
+                            <small class="text-muted d-block text-nowrap mt-0.5">{{ $inq->created_at->format('h:i A') }}</small>
                         </td>
                         <td>
-                            <strong class="text-navy">{{ $inq->name }}</strong>
-                        </td>
-                        <td>
-                            <a href="tel:{{ $inq->phone }}" class="text-decoration-none text-dark small">
-                                <i class="bi bi-telephone me-1 text-primary"></i> {{ $inq->phone }}
+                            <strong class="text-navy d-block">{{ $inq->name }}</strong>
+                            <a href="tel:{{ $inq->phone }}" class="text-decoration-none text-muted small d-inline-flex align-items-center gap-1 mt-0.5">
+                                <i class="bi bi-telephone text-primary" style="font-size: 0.78rem;"></i>
+                                <span>{{ $inq->phone }}</span>
                             </a>
                         </td>
                         <td>
-                            <a href="mailto:{{ $inq->email }}" class="text-decoration-none text-dark small">
+                            <a href="mailto:{{ $inq->email }}" class="text-decoration-none text-dark small text-break">
                                 <i class="bi bi-envelope me-1 text-primary"></i> {{ $inq->email }}
                             </a>
                         </td>
                         <td>
                             <small class="d-block">{{ $inq->country ?? '-' }}</small>
-                            <span class="badge bg-light text-dark border">{{ $inq->profession_role ?? 'Other' }}</span>
+                            <span class="badge bg-light text-dark border text-wrap" style="max-width: 200px; line-height: 1.35;">{{ $inq->profession_role ?? 'Other' }}</span>
                         </td>
                         <td>
-                            <span class="badge bg-light text-dark border">{{ $inq->program_name ?? 'General' }}</span>
+                            <span class="badge bg-light text-dark border text-wrap" style="max-width: 200px; line-height: 1.35;">{{ $inq->program_name ?? 'General' }}</span>
                         </td>
                         <td>
                             @if($inq->status === 'new')
@@ -93,18 +121,16 @@
                         </td>
                         <td class="text-end text-nowrap">
                             <div class="table-actions">
-                                <a href="{{ route('admin.inquiries.show', $inq->id) }}#reply-card" class="btn btn-sm btn-primary rounded-pill px-3 fw-semibold d-inline-flex align-items-center gap-1 shadow-sm" style="font-size: 0.8rem;" title="Direct Email Reply">
+                                <a href="{{ route('admin.inquiries.show', $inq->id) }}#reply-card" class="btn-action-btn btn-action-reply" title="Direct Email Reply">
                                     <i class="bi bi-reply-fill"></i>
-                                    <span>Reply</span>
                                 </a>
-                                <a href="{{ route('admin.inquiries.show', $inq->id) }}" class="btn btn-sm btn-light border rounded-pill px-3 fw-semibold d-inline-flex align-items-center gap-1" style="color: var(--hok-navy); font-size: 0.8rem;">
+                                <a href="{{ route('admin.inquiries.show', $inq->id) }}" class="btn-action-btn btn-action-view" title="View Details">
                                     <i class="bi bi-eye"></i>
-                                    <span>Details</span>
                                 </a>
                                 <form action="{{ route('admin.inquiries.destroy', $inq->id) }}" method="POST" class="d-inline m-0 p-0" onsubmit="return confirm('Delete this inquiry record?');">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="btn-action-btn btn-action-delete" title="Delete">
+                                    <button type="submit" class="btn-action-btn btn-action-delete" title="Delete Inquiry">
                                         <i class="bi bi-trash"></i>
                                     </button>
                                 </form>
@@ -113,7 +139,7 @@
                     </tr>
                 @empty
                     <tr>
-                        <td colspan="8" class="text-center py-4 text-muted">No inquiries found matching criteria.</td>
+                        <td colspan="7" class="text-center py-4 text-muted">No inquiries found matching criteria.</td>
                     </tr>
                 @endforelse
             </tbody>
@@ -121,7 +147,7 @@
     </div>
 
     @if($inquiries->hasPages())
-        <div class="card-footer bg-white py-3">
+        <div class="card-footer bg-white py-3 border-top">
             {{ $inquiries->links('pagination::bootstrap-5') }}
         </div>
     @endif

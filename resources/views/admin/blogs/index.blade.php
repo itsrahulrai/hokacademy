@@ -1,16 +1,16 @@
 @extends('admin.layouts.app')
 
-@section('title', 'Blog Articles')
+@section('title', 'Blogs')
 
 @section('content')
 <div class="d-flex flex-wrap justify-content-between align-items-center gap-3 mb-4">
     <div>
-        <h2 class="h4 fw-bold mb-1" style="color: var(--hok-navy);">Blog Articles &amp; Clinical Insights</h2>
-        <p class="text-muted small mb-0">Publish and manage educational articles, guides and clinical insights.</p>
+        <h2 class="h4 fw-bold mb-1" style="color: var(--hok-navy);">Blogs &amp; Clinical Insights</h2>
+        <p class="text-muted small mb-0">Publish and manage educational blogs, guides and clinical insights.</p>
     </div>
     <a href="{{ route('admin.blogs.create') }}" class="btn btn-hok-admin shadow-sm">
         <i class="bi bi-pencil-square"></i>
-        <span>Write New Article</span>
+        <span>Write New Blog</span>
     </a>
 </div>
 
@@ -39,7 +39,7 @@
         <table class="table table-hover align-middle mb-0">
             <thead>
                 <tr>
-                    <th>Article Title</th>
+                    <th>Blog Title</th>
                     <th>Category</th>
                     <th>Published Date</th>
                     <th>Read Time</th>
@@ -72,13 +72,13 @@
                         </td>
                         <td class="text-end text-nowrap">
                             <div class="table-actions">
-                                <a href="{{ route('blog.show', $b->slug) }}" target="_blank" class="btn-action-btn btn-action-view" title="View Article">
+                                <a href="{{ route('blog.show', $b->slug) }}" target="_blank" class="btn-action-btn btn-action-view" title="View Blog">
                                     <i class="bi bi-eye"></i>
                                 </a>
-                                <a href="{{ route('admin.blogs.edit', $b->id) }}" class="btn-action-btn btn-action-edit" title="Edit Article">
+                                <a href="{{ route('admin.blogs.edit', $b->id) }}" class="btn-action-btn btn-action-edit" title="Edit Blog">
                                     <i class="bi bi-pencil"></i>
                                 </a>
-                                <form action="{{ route('admin.blogs.destroy', $b->id) }}" method="POST" class="d-inline m-0 p-0" onsubmit="return confirm('Are you sure you want to delete this article?');">
+                                <form action="{{ route('admin.blogs.destroy', $b->id) }}" method="POST" class="d-inline m-0 p-0" onsubmit="return confirm('Are you sure you want to delete this blog?');">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="btn-action-btn btn-action-delete" title="Delete">
@@ -90,7 +90,7 @@
                     </tr>
                 @empty
                     <tr>
-                        <td colspan="6" class="text-center py-4 text-muted">No articles found. Click "Write New Article" to create one.</td>
+                        <td colspan="6" class="text-center py-4 text-muted">No blogs found. Click "Write New Blog" to create one.</td>
                     </tr>
                 @endforelse
             </tbody>
@@ -98,7 +98,7 @@
     </div>
 
     @if($blogs->hasPages())
-        <div class="card-footer bg-white py-3">
+        <div class="card-footer bg-white py-3 border-top">
             {{ $blogs->links('pagination::bootstrap-5') }}
         </div>
     @endif

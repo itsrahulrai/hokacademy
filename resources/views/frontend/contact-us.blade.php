@@ -1,5 +1,25 @@
 @extends('layouts.app')
 
+@php
+    $sitePhone = \App\Models\Setting::get('contact_phone', '+91 99101 69317');
+    $sitePhoneRaw = \App\Models\Setting::get('contact_phone_raw', '+919910169317');
+    $siteWhatsapp = \App\Models\Setting::get('contact_whatsapp', '919910169317');
+    $siteEmail = \App\Models\Setting::get('contact_email', 'hokacademy@yahoo.com');
+    $siteAddress = \App\Models\Setting::get('contact_address', 'Your full address, City, State, India');
+    $siteHours = \App\Models\Setting::get('office_hours', 'Monday to Saturday, 10:00 AM to 6:00 PM (IST)');
+    
+    $rawMap = \App\Models\Setting::get('google_maps_embed', '');
+    $mapEmbedUrl = '';
+
+    if (!empty($rawMap)) {
+        if (preg_match('/src=["\']([^"\']+)["\']/', $rawMap, $m)) {
+            $mapEmbedUrl = $m[1];
+        } else {
+            $mapEmbedUrl = trim($rawMap);
+        }
+    }
+@endphp
+
 @section('content')
 <main id="main">
 
@@ -17,7 +37,7 @@
                 Send us your enquiry and our team will reply with the right next step.</p>
             <div class="btn-row">
                 <a href="#enquiry" class="btn btn-light btn-lg">Send an Enquiry</a>
-                <a href="tel:+919910169317" class="btn btn-ghost btn-lg">Call Us</a>
+                <a href="tel:{{ $sitePhoneRaw }}" class="btn btn-ghost btn-lg">Call Us</a>
             </div>
         </div>
     </section>
@@ -47,29 +67,28 @@
                         right program, schedule or faculty member.</p>
 
                     <div class="ct-tiles">
-                        <a class="ct-tile c-blue" href="tel:+919910169317">
+                        <a class="ct-tile c-blue" href="tel:{{ $sitePhoneRaw }}">
                             <span class="wt-ico"><i class="bi bi-telephone"></i></span>
-                            <span class="ct-tile-txt"><small>Call</small><strong>+91 99101 69317</strong></span>
+                            <span class="ct-tile-txt"><small>Call</small><strong>{{ $sitePhone }}</strong></span>
                         </a>
-                        <a class="ct-tile c-teal" href="https://wa.me/919910169317" target="_blank"
+                        <a class="ct-tile c-teal" href="https://wa.me/{{ preg_replace('/[^0-9]/', '', $siteWhatsapp) }}" target="_blank"
                             rel="noopener">
                             <span class="wt-ico"><i class="bi bi-whatsapp"></i></span>
-                            <span class="ct-tile-txt"><small>WhatsApp</small><strong>+91 99101 69317</strong></span>
+                            <span class="ct-tile-txt"><small>WhatsApp</small><strong>{{ $sitePhone }}</strong></span>
                         </a>
-                        <a class="ct-tile c-navy" href="mailto:hokacademy@yahoo.com">
+                        <a class="ct-tile c-navy" href="mailto:{{ $siteEmail }}">
                             <span class="wt-ico"><i class="bi bi-envelope"></i></span>
-                            <span class="ct-tile-txt"><small>Email</small><strong>hokacademy@yahoo.com</strong></span>
+                            <span class="ct-tile-txt"><small>Email</small><strong>{{ $siteEmail }}</strong></span>
                         </a>
                         <div class="ct-tile c-red">
                             <span class="wt-ico"><i class="bi bi-geo-alt"></i></span>
-                            <span class="ct-tile-txt"><small>Visit</small><strong>Your full address, City,
-                                    State, India</strong></span>
+                            <span class="ct-tile-txt"><small>Visit</small><strong>{{ $siteAddress }}</strong></span>
                         </div>
                     </div>
 
                     <div class="ct-hours">
                         <i class="bi bi-clock"></i>
-                        <p><strong>Office hours</strong><br>Monday to Saturday, 10:00 AM to 6:00 PM (IST)</p>
+                        <p><strong>Office hours</strong><br>{{ $siteHours }}</p>
                     </div>
                 </div>
 
@@ -283,10 +302,18 @@
         <div class="container">
 
             <div class="ct-map">
-                <!-- Google Maps embed link -->
-                <iframe src="" title="HOK Academy location map" loading="lazy"
-                    referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
-                <div class="ct-map-fb"><i class="bi bi-geo-alt"></i><span>Map will appear here</span></div>
+                @if(!empty($mapEmbedUrl))
+                    <!-- Dynamic Google Maps embed configured in Admin > Settings -->
+                    <iframe src="{{ $mapEmbedUrl }}" title="HOK Academy location map" loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
+                @else
+                    <iframe src="" title="HOK Academy location map" loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
+                    <div class="ct-map-fb">
+                        <i class="bi bi-geo-alt"></i>
+                        <span>Location map can be configured in Admin &gt; Settings &gt; Contact &amp; Location</span>
+                    </div>
+                @endif
             </div>
 
             <div class="cta-row">

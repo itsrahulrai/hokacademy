@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use App\Models\Blog;
+use App\Services\BlogAiService;
 
 class BlogController extends Controller
 {
@@ -60,7 +61,7 @@ class BlogController extends Controller
 
         Blog::create($validated);
 
-        return redirect()->route('admin.blogs.index')->with('success', 'Blog article created successfully!');
+        return redirect()->route('admin.blogs.index')->with('success', 'Blog created successfully!');
     }
 
     public function edit(Blog $blog)
@@ -96,13 +97,46 @@ class BlogController extends Controller
 
         $blog->update($validated);
 
-        return redirect()->route('admin.blogs.index')->with('success', 'Blog article updated successfully!');
+        return redirect()->route('admin.blogs.index')->with('success', 'Blog updated successfully!');
     }
 
     public function destroy(Blog $blog)
     {
         $blog->delete();
-        return redirect()->route('admin.blogs.index')->with('success', 'Blog article deleted successfully!');
+        return redirect()->route('admin.blogs.index')->with('success', 'Blog deleted successfully!');
+    }
+
+    public function generateAiContent(Request $request)
+    {
+        $validated = $request->validate([
+            'title' => 'required|string|max:255',
+            'category_tag' => 'nullable|string|max:100',
+            'custom_prompt' => 'nullable|string|max:1000',
+            'target' => 'nullable|string|in:all,excerpt,content',
+        ]);
+
+        $target = $validated['target'] ?? 'all';
+
+        $result = BlogAiService::generateContent(
+            $validated['title'],
+            $validated['category_tag'] ?? '',
+            $validated['custom_prompt'] ?? '',
+            $target
+        );
+
+        if ($result['success'] ?? false) {
+            return response()->json([
+                'success' => true,
+                'provider' => $result['provider'] ?? 'AI Assistant',
+                'target' => $target,
+                'data' => $result['data']
+            ]);
+        }
+
+        return response()->json([
+            'success' => false,
+            'message' => 'Unable to generate blog content at this moment. Please try again.'
+        ], 500);
     }
 }
 

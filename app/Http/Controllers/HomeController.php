@@ -23,7 +23,7 @@ class HomeController extends Controller
         
         $featuredPrograms = Program::where('is_active', true)->where('is_featured', true)->orderBy('sort_order')->take(6)->get();
         $faculty = FacultyMember::where('is_active', true)->orderBy('sort_order')->take(4)->get();
-        $recentBlogs = Blog::where('is_published', true)->orderBy('published_at', 'desc')->take(3)->get();
+        $recentBlogs = Blog::where('is_published', true)->orderByRaw('COALESCE(published_at, created_at) DESC')->take(3)->get();
         $whyFeatures = WhyFeature::where('type', 'why_hok')->where('is_active', true)->orderBy('sort_order')->get();
         $philosophy = WhyFeature::where('type', 'philosophy')->where('is_active', true)->orderBy('sort_order')->get();
 

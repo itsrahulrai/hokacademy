@@ -97,6 +97,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::delete('/inquiries/{inquiry}', [AdminInquiryController::class, 'destroy'])->name('inquiries.destroy');
 
         // Programs & Categories
+        Route::post('/programs/ai-generate', [AdminProgramController::class, 'generateAiContent'])->name('programs.ai-generate');
         Route::resource('programs', AdminProgramController::class);
         Route::resource('categories', AdminCategoryController::class)->except(['create', 'show', 'edit']);
 
@@ -104,6 +105,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::resource('faculty', AdminFacultyController::class)->except(['show']);
 
         // Blogs
+        Route::post('/blogs/ai-generate', [AdminBlogController::class, 'generateAiContent'])->name('blogs.ai-generate');
         Route::resource('blogs', AdminBlogController::class)->except(['show']);
 
         // Hero Slides
@@ -113,7 +115,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::resource('why-features', AdminWhyFeatureController::class)->except(['show']);
 
         // Pages & SEO
-        Route::resource('pages', AdminPageController::class)->only(['index', 'edit', 'update']);
+        Route::resource('pages', AdminPageController::class)->except(['show']);
 
         // Website Global Settings
         Route::get('/settings', [AdminSettingController::class, 'index'])->name('settings.index');
@@ -125,3 +127,6 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::put('/profile', [AdminProfileController::class, 'update'])->name('profile.update');
     });
 });
+
+// Dynamic Custom Frontend Page Fallback
+Route::get('/{slug}', [PageController::class, 'show'])->name('pages.dynamic')->where('slug', '^[a-zA-Z0-9\-_]+$');

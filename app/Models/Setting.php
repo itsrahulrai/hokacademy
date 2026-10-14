@@ -28,15 +28,20 @@ class Setting extends Model
      */
     public static function set(string $key, mixed $value, string $group = 'general', string $type = 'text', ?string $label = null): static
     {
-        return static::updateOrCreate(
-            ['key' => $key],
-            [
-                'value' => $value,
-                'group' => $group,
-                'type' => $type,
-                'label' => $label ?? ucwords(str_replace('_', ' ', $key)),
-            ]
-        );
+        $setting = static::where('key', $key)->first();
+        if ($setting) {
+            $setting->value = $value;
+            $setting->save();
+            return $setting;
+        }
+
+        return static::create([
+            'key' => $key,
+            'value' => $value,
+            'group' => $group,
+            'type' => $type,
+            'label' => $label ?? ucwords(str_replace('_', ' ', $key)),
+        ]);
     }
 }
 

@@ -411,6 +411,58 @@
                             <textarea name="contact_address" class="form-control form-control-elevated" rows="3" placeholder="Full physical clinic / academy address with postal code...">{{ \App\Models\Setting::get('contact_address') }}</textarea>
                         </div>
                     </div>
+
+                    <div class="col-12 mt-3">
+                        <div class="d-flex align-items-center justify-content-between mb-1">
+                            <label class="form-label small fw-semibold mb-0">
+                                <i class="bi bi-geo-alt-fill text-danger me-1"></i> Google Maps Embed (Location Map on Contact Page)
+                            </label>
+                            @php
+                                $currentMap = \App\Models\Setting::get('google_maps_embed');
+                            @endphp
+                            @if(!empty($currentMap))
+                                <span class="badge rounded-pill px-2 py-1" style="background: var(--hok-emerald); color: #fff;">
+                                    <i class="bi bi-check-circle-fill me-1"></i> Map Configured
+                                </span>
+                            @else
+                                <span class="badge bg-secondary rounded-pill px-2 py-1">
+                                    <i class="bi bi-dash-circle me-1"></i> Not Configured
+                                </span>
+                            @endif
+                        </div>
+                        <div class="input-group">
+                            <span class="input-group-text input-group-text-custom align-items-start pt-2"><i class="bi bi-map text-primary"></i></span>
+                            <textarea name="google_maps_embed" class="form-control form-control-elevated" rows="3" placeholder='Paste your Google Maps embed URL (e.g. https://www.google.com/maps/embed?pb=...) or the full <iframe>...</iframe> embed tag from Google Maps ("Share" -> "Embed a map")...'>{{ \App\Models\Setting::get('google_maps_embed') }}</textarea>
+                        </div>
+                        <div class="form-text small text-muted mt-1">
+                            <i class="bi bi-info-circle me-1"></i>
+                            <strong>How to get it:</strong> Open Google Maps &rarr; Search your clinic or academy location &rarr; Click <strong>Share</strong> &rarr; Select <strong>Embed a map</strong> &rarr; Click <strong>Copy HTML</strong> and paste it directly here.
+                        </div>
+
+                        @if(!empty($currentMap))
+                            @php
+                                $previewUrl = '';
+                                if (preg_match('/src=["\']([^"\']+)["\']/', $currentMap, $m)) {
+                                    $previewUrl = $m[1];
+                                } else {
+                                    $previewUrl = trim($currentMap);
+                                }
+                            @endphp
+                            @if(!empty($previewUrl))
+                                <div class="mt-3 p-3 bg-light rounded-3 border">
+                                    <div class="d-flex align-items-center justify-content-between mb-2">
+                                        <span class="small fw-bold text-dark"><i class="bi bi-eye me-1"></i> Live Map Preview:</span>
+                                        <a href="{{ $previewUrl }}" target="_blank" class="small text-decoration-none">
+                                            Open in Google Maps <i class="bi bi-box-arrow-up-right ms-1"></i>
+                                        </a>
+                                    </div>
+                                    <div style="aspect-ratio: 21 / 7; border-radius: 8px; overflow: hidden; border: 1px solid #cbd5e1; background: #e2e8f0;">
+                                        <iframe src="{{ $previewUrl }}" style="width: 100%; height: 100%; border: 0;" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                                    </div>
+                                </div>
+                            @endif
+                        @endif
+                    </div>
                 </div>
             </div>
         </div>

@@ -50,12 +50,12 @@
         <li class="menu-header">Content &amp; Media</li>
         <li>
             <a href="{{ route('admin.blogs.index') }}" class="{{ request()->routeIs('admin.blogs.*') ? 'active' : '' }}">
-                <i class="bi bi-journal-richtext"></i> Blog Articles
+                <i class="bi bi-journal-richtext"></i> Blogs
             </a>
         </li>
         <li>
             <a href="{{ route('admin.hero-slides.index') }}" class="{{ request()->routeIs('admin.hero-slides.*') ? 'active' : '' }}">
-                <i class="bi bi-images"></i> Hero Carousel Slides
+                <i class="bi bi-images"></i> Hero Slides
             </a>
         </li>
         <li>
@@ -67,14 +67,14 @@
         <li class="menu-header">SEO &amp; Pages</li>
         <li>
             <a href="{{ route('admin.pages.index') }}" class="{{ request()->routeIs('admin.pages.*') ? 'active' : '' }}">
-                <i class="bi bi-file-earmark-code"></i> Pages &amp; SEO Meta
+                <i class="bi bi-file-earmark-code"></i> Pages
             </a>
         </li>
 
         <li class="menu-header">System</li>
         <li>
             <a href="{{ route('admin.settings.index') }}" class="{{ request()->routeIs('admin.settings.*') ? 'active' : '' }}">
-                <i class="bi bi-gear"></i> Website Settings
+                <i class="bi bi-gear"></i> Settings
             </a>
         </li>
         <li>

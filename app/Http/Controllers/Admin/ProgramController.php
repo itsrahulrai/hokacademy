@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use App\Models\Program;
 use App\Models\ProgramCategory;
+use App\Services\ProgramAiService;
 
 class ProgramController extends Controller
 {
@@ -132,6 +133,47 @@ class ProgramController extends Controller
     {
         $program->delete();
         return redirect()->route('admin.programs.index')->with('success', 'Program deleted successfully!');
+    }
+
+    public function generateAiContent(Request $request)
+    {
+        $validated = $request->validate([
+            'title' => 'required|string|max:255',
+            'category_id' => 'nullable|exists:program_categories,id',
+            'custom_prompt' => 'nullable|string|max:1000',
+            'target' => 'nullable|string|in:all,short_description,full_description',
+        ]);
+
+        $categoryName = '';
+        if (!empty($validated['category_id'])) {
+            $cat = ProgramCategory::find($validated['category_id']);
+            if ($cat) {
+                $categoryName = $cat->name;
+            }
+        }
+
+        $target = $validated['target'] ?? 'all';
+
+        $result = ProgramAiService::generateContent(
+            $validated['title'],
+            $categoryName,
+            $validated['custom_prompt'] ?? '',
+            $target
+        );
+
+        if ($result['success'] ?? false) {
+            return response()->json([
+                'success' => true,
+                'provider' => $result['provider'] ?? 'AI Assistant',
+                'target' => $target,
+                'data' => $result['data']
+            ]);
+        }
+
+        return response()->json([
+            'success' => false,
+            'message' => 'Unable to generate course content at this moment. Please try again.'
+        ], 500);
     }
 }
 

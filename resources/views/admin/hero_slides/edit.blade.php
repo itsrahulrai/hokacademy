@@ -78,7 +78,7 @@
 
             <div class="col-12 mt-4">
                 <button type="submit" class="btn btn-hok-admin px-4 py-2">
-                    <i class="bi bi-save me-1"></i> Update Slide
+                    <i class="bi bi-save me-1"></i> Update
                 </button>
             </div>
         </div>

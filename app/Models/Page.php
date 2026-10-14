@@ -12,6 +12,7 @@ class Page extends Model
         'title',
         'header_title',
         'header_subtitle',
+        'content',
         'meta_title',
         'meta_description',
         'meta_keywords',

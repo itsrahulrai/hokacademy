@@ -31,7 +31,7 @@ class InquiryController extends Controller
             });
         }
 
-        $inquiries = $query->paginate(15)->withQueryString();
+        $inquiries = $query->paginate(10)->withQueryString();
 
         return view('admin.inquiries.index', compact('inquiries'));
     }
